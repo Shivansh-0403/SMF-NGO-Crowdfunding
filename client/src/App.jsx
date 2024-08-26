@@ -1,15 +1,15 @@
 import React from 'react'
 import Navbar from './components/Navbar'
-import Header from './components/Header'
-import Topngo from './components/Topngo'
 import Footer from './components/Footer'
+import Home from './pages/Home'
+import Listall from './pages/Listall'
 
 function App() {
   return (
     <>
       <Navbar />
-      <Header />
-      <Topngo />
+      <Listall></Listall>
+      {/* <Home></Home> */}
       <Footer />
     </>
   )

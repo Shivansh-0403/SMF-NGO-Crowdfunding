@@ -61,3 +61,8 @@ function Topngo() {
 }
 
 export default Topngo
+
+// Logo
+// Name
+// Location
+// Rating
