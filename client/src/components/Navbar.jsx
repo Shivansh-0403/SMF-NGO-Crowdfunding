@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,13 +13,13 @@ const Navbar = () => {
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
-                        <a href="/">
+                        <Link to="/">
                             <img
                                 className="w-auto h-6 sm:h-7"
                                 src="https://merakiui.com/images/full-logo.svg"
                                 alt="Logo"
                             />
-                        </a>
+                        </Link>
 
                         {/* Mobile menu button */}
                         <div className="flex lg:hidden">
@@ -61,30 +62,30 @@ const Navbar = () => {
                             }`}
                     >
                         <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                            <a
-                                href="/"
+                            <Link 
+                                to="/"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 Home
-                            </a>
-                            <a
-                                href="/about"
+                            </Link>
+                            <Link 
+                                to="/about"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 About
-                            </a>
-                            <a
-                                href="/listings"
+                            </Link>
+                            <Link 
+                                to="/listings"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 Browse NGOs
-                            </a>
-                            <a
-                                href="/listings"
+                            </Link>
+                            <Link 
+                                to="/listings"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 Donate
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="flex items-center mt-4 lg:mt-0">
