@@ -12,7 +12,7 @@ const Navbar = () => {
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
-                        <a href="#">
+                        <a href="/">
                             <img
                                 className="w-auto h-6 sm:h-7"
                                 src="https://merakiui.com/images/full-logo.svg"
@@ -62,28 +62,28 @@ const Navbar = () => {
                     >
                         <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                             <a
-                                href="#"
+                                href="/"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                Join Slack
+                                Home
                             </a>
                             <a
-                                href="#"
+                                href="/about"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                Browse Topics
+                                About
                             </a>
                             <a
-                                href="#"
+                                href="/listings"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                Random Item
+                                Browse NGOs
                             </a>
                             <a
-                                href="#"
+                                href="/listings"
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                Experts
+                                Donate
                             </a>
                         </div>
 

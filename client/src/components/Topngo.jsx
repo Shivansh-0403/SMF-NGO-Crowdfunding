@@ -34,7 +34,7 @@ function Topngo() {
                 <div className="container px-6 py-8 mx-auto">
                 {/* <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" /> */}
                     <h2 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
-                        Our Team
+                        Top NGOs
                     </h2>
 
                     <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

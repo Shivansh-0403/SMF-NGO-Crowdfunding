@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Header = () => {
+const Main_Header = () => {
     return (
         <header className="bg-white dark:bg-gray-900">
             <div className="container px-6 py-16 mx-auto">
@@ -8,18 +8,17 @@ const Header = () => {
                     <div className="w-full lg:w-1/2">
                         <div className="lg:max-w-lg">
                             <h1 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
-                                Best place to choose <br /> your{' '}
-                                <span className="text-blue-500">clothes</span>
+                                Seva Mein Funds <br /> NGO{' '}
+                                <span className="text-blue-500">Crowdfunding Platform</span>
                             </h1>
 
                             <p className="mt-3 text-gray-600 dark:text-gray-400">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro
-                                beatae error laborum ab amet sunt recusandae? Reiciendis natus
-                                perspiciatis optio.
+                                At SMF, we are trying to promote the good work of NGOs, support and encourage them 
+                                with your support.
                             </p>
 
-                            <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                                Shop Now
+                            <button className="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                                Browse NGOs..
                             </button>
                         </div>
                     </div>
@@ -37,4 +36,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Main_Header;

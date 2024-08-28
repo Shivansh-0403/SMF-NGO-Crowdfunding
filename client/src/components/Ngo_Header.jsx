@@ -1,6 +1,6 @@
 import React from "react";
 
-const Heading = () => {
+const Ngo_Header = () => {
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="container flex flex-col items-center justify-evenly px-4 py-12 mx-auto xl:flex-row">
@@ -19,4 +19,4 @@ const Heading = () => {
     );
 };
 
-export default Heading;
+export default Ngo_Header;

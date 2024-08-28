@@ -1,10 +1,10 @@
 import React from 'react';
-import Heading from './Heading';
+import Heading from './Ngo_Header';
 
 function Details() {
     return (
         <div>
-            <Heading />
+            {/* <Heading /> */}
             <div className="flow-root py-3 shadow-sm px-[20%] dark:bg-gray-900">
                 <dl className="divide-y divide-gray-100 text-md bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">

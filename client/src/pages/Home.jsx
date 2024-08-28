@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../components/Main_Header'
 import Topngo from '../components/Topngo'
 
 function Home() {
