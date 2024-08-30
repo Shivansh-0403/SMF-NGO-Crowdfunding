@@ -8,6 +8,6 @@ import { list_all } from "../controllers/ngo.controller.js";
 // router.route("/login").post(loginUser)
 // router.route("/reset-password/:id/:token").post(resetPassword)
 
-router.route("/ngo-listings").get()
+router.route("/all-ngos").get()
 
 export default router
