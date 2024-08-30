@@ -14,7 +14,7 @@ app.use(cors({
 // app.use(express.json({limit: "16kb"}))
 
 app.use(express.json())
-app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.urlencoded({extended: true}))
 app.use(express.static("public"))
 // app.use(cookieParser())
 
@@ -49,7 +49,5 @@ connectDB()
     console.log("MONGO db connection failed !!! ", err);
 })
 
-// import userRouter from './routes/user.route.js'
-// import podcastRouter from './routes/podcast.route.js'
-// app.use("/api/user", userRouter)
-// app.use("/api/podcast", podcastRouter)
+import userRouter from './routes/user.route.js'
+app.use("/api/user", userRouter)
