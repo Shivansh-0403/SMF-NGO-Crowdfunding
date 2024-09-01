@@ -9,11 +9,12 @@ const ngoSchema = new Schema(
         },
         owner: {
             type: Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
+            required: true
         },
         logo: {
             type: String,   // Cloudinary URL
-            required: true,
+            // required: true,
         },
         email: {
             type: String,
@@ -22,7 +23,7 @@ const ngoSchema = new Schema(
         },
         website: {
             type: String,
-            required: true,
+            // required: true,
         },
         contact: {
             type: String,
@@ -38,7 +39,10 @@ const ngoSchema = new Schema(
         },
         rating: {
             type: float,
-            required: true
+            // required: true
+        },
+        photos: {
+            type: Array
         }
     },
     {
