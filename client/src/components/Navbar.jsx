@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const [isLoggedIn, setLoggedIn] = useState(true);  // Assuming the user is logged in initially
+    const [isLoggedIn, setLoggedIn] = useState(useSelector(state => state.userLoggedIn));  // Assuming the user is logged in initially
     const [isDropdownVisible, setDropdownVisible] = useState(false);
 
     const toggleMenu = () => {
@@ -13,6 +15,9 @@ const Navbar = () => {
     const handleClick = () => {
         if (isLoggedIn) {
             setDropdownVisible(!isDropdownVisible);
+        }
+        else {
+            navigate("/login");
         }
     };
 

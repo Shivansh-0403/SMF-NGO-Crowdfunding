@@ -7,7 +7,7 @@ function RegisterNgo() {
                 <h2 className="text-3xl font-semibold text-gray-700 capitalize text-center py-5 dark:text-white">Register Your NGO</h2>
                 <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
-                <htmlForm>
+                <div>
                     <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
                             <label className="text-gray-700 dark:text-gray-200" htmlFor="username">Organization Name</label>
@@ -57,10 +57,16 @@ function RegisterNgo() {
                         </label> */}
                     </div>
 
-                    <div className="flex justify-end mt-6">
-                        <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                    <div className='flex justify-around'>
+                        <div className="mt-6">
+                            <button className="px-8 py-2.5 text-lg leading-5 text-white transition-colors duration-300 div bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Cancel</button>
+                        </div>
+                        <div className="mt-6">
+                            <button className="px-8 py-2.5 text-lg leading-5 text-white transition-colors duration-300 div bg-emerald-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                        </div>
                     </div>
-                </htmlForm>
+                </div>
+                <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
             </section>
         </div>
     )

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { setUser, setLoginStatus } from '../../features/userSlice';
+import { setUser, setLoginStatus } from '../features/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -30,10 +30,8 @@ const Login = () => {
             localStorage.setItem('refreshToken', refreshToken);
     
             const storeUser = {
-                username: user.username,
+                name: user.name,
                 email: user.email,
-                fullname: user.fullname,
-                avatar: user.avatar
             };
     
             dispatch(setUser(storeUser));

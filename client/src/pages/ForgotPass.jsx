@@ -15,7 +15,7 @@ function ForgotPass() {
       const response = await axios.post('/api/user/forgot-password', reqBody)
 
       console.log(response);
-      // window.alert("Mail has been sent succesfully")
+      window.alert("Mail has been sent succesfully")
     } catch (error) {
       console.log(error);
     }
