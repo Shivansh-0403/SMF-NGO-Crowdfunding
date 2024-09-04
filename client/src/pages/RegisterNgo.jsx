@@ -42,8 +42,7 @@ function RegisterNgo() {
             formData.append("address", ngoData.address);
             formData.append("city", ngoData.city);
             formData.append("contact", ngoData.contact);
-
-            formData.append('logo', file);
+            formData.append("logo", file);
             console.log(ngoData);
             const response = await axios.post("/api/ngo/register-ngo", formData, {
                 headers: {

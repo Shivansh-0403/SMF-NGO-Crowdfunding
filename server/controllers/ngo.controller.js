@@ -38,13 +38,12 @@ const registerNgo = async (req, res) => {
         console.log(req.body);
         const { name, email, owner, website, contact, address, location } = req.body;
 
-        const requiredFields = { name, email, owner, website, contact, address, location };
 
-        for (const [key, value] of Object.entries(requiredFields)) {
-            if (!value || value.trim() === "") {
-                throw new Error(`The field '${key}' is required`);
-            }
-        }
+        // for (const [key, value] of Object.entries(requiredFields)) {
+        //     if (!value || value.trim() === "") {
+        //         throw new Error(`The field '${key}' is required`);
+        //     }
+        // }
 
         const existingUser = await Ngo.findOne({ email });
 
@@ -53,26 +52,29 @@ const registerNgo = async (req, res) => {
         }
 
         // if (!req.files) {
-        //     throw new Error("Avatar is required")
+        //     throw new Error("Logo is required")
         // }
 
-        // const avatarLocalPath = req.files?.avatar[0]?.path
-        // console.log(req.file);
-        // const avatarLocalPath = req.file.path
+        const logoLocalPath = req.files?.logo[0]?.path
+        console.log(req.file);
+        // const logoLocalPath = req.file.path
 
-        // if (!avatarLocalPath) {
-        //     throw new Error("Avatar file is required")
+        // if (!logoLocalPath) {
+        //     throw new Error("Logo is required")
         // }
 
-        // const avatar = await uploadOnCloudinary(avatarLocalPath)
+        const logo = await uploadOnCloudinary(logoLocalPath)
         // console.log(avatar)
         // const user = await User.create({ username, email, fullname, avatar, password });
-        const org = await Ngo.create({
-            requiredFields,
-            rating: 0,
-            // logo,
+        const requiredFields = { name, email, owner, website, contact, address, location, logo: logo?.url || "", rating:0 };
+        // const org = await Ngo.create({
+            // requiredFields,
+            // rating: 0,
+            // logo
             // photos
-        })
+        // })
+
+        const org = await Ngo.create(requiredFields)
 
         if (!org) {
             throw new Error('Ngo registration unsuccessful');

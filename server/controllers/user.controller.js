@@ -14,9 +14,9 @@ dotenv.config({
 const registerUser = async (req, res) => {
     try {
         console.log(req.body);
-        const { name, email, type, password } = req.body;
+        const { email, name, password } = req.body;
 
-        if (name == "" || email == "" || password == "" || type == "") {
+        if (name == "" || email == "" || password == "") {
             throw new Error("All fields are required");
         }
 
@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
         const user = await User.create({
             name,
             email,
-            type,
+            // type,
             // avatar: avatar?.url || "",
             // creations: [],
             password

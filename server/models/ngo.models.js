@@ -4,13 +4,13 @@ const ngoSchema = new Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: [true, "Name is Mandatory"],
             index: true
         },
         owner: {
             type: Schema.Types.ObjectId,
             ref: "User",
-            required: true
+            // required: true
         },
         logo: {
             type: String,   // Cloudinary URL
@@ -18,7 +18,7 @@ const ngoSchema = new Schema(
         },
         email: {
             type: String,
-            required: true,
+            required: [true, "Email is Required"],
             unique: true,
         },
         website: {
@@ -27,18 +27,18 @@ const ngoSchema = new Schema(
         },
         contact: {
             type: String,
-            required: true
+            required: [true, "Contact Info Required"],
         },
         address: {
             type: String,
-            required: true
+            required: [true, "Complete Address Required"],
         },
         location: {
             type: String,
-            required: true
+            // required: true
         },
         rating: {
-            type: float,
+            type: Number,
             // required: true
         },
         photos: {

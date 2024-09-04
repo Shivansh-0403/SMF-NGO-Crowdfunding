@@ -31,12 +31,14 @@ const Register = () => {
             formData.append('name', userData.name);
             formData.append('password', userData.password);
             // formData.append('avatar', file);
-            console.log(userData);
-            const response = await axios.post('/api/user/register', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            console.log(formData);
+            const response = await axios.post('/api/user/register', userData);
+                // , {
+                // headers: {
+                //     'Content-Type': 'multipart/form-data'
+                // }
+                // }
+            // )
             console.log(response);
             if (!response.data) {
                 console.log("HELLO");
