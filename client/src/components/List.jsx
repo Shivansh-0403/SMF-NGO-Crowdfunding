@@ -1,62 +1,85 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 function List() {
-    const items = [
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        },
-        {
-            title: "Backpack",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
-            price: "$220",
-            imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        }
-        // Add more items here as needed
-    ];
+    // const items = [
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     },
+    //     {
+    //         title: "Backpack",
+    //         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit In odit",
+    //         price: "$220",
+    //         imageUrl: "https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    //     }
+    //     // Add more items here as needed
+    // ];
+
+    const [data, setData] = useState([]);
+    // const [error, setError] = useState();
+    useEffect(() => {
+        // Function to fetch data from the backend
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/ngo/list-ngos');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                setData(result); // Update state with the fetched data
+            } catch (err) {
+                // setError(err.message); // Handle error and update state
+                console.log(err.message);
+            }
+        };
+
+        fetchData(); // Call the fetchData function as soon as the component mounts
+    }, []);
+
 
     return (
         <div className="bg-gray-900 flex justify-center py-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {items.map((item, index) => (
+                {data.map((item, index) => (
                     <div key={index} className="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
                         <div
                             className="w-1/3 bg-cover bg-center"

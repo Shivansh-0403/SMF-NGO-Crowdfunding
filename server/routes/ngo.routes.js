@@ -8,7 +8,7 @@ import { list_all, registerNgo } from "../controllers/ngo.controller.js";
 // router.route("/login").post(loginUser)
 // router.route("/reset-password/:id/:token").post(resetPassword)
 
-router.route("/all-ngos").get(list_all)
-router.route("/register-ngo").post(registerNgo)
+router.route("/list-ngos").get(list_all)
+router.route("/register-ngo").post(upload.single("logo"), registerNgo)
 
 export default router

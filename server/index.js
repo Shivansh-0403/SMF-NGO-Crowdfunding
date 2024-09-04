@@ -51,4 +51,6 @@ connectDB()
 
 
 import userRouter from './routes/user.routes.js'
+import ngoRouter from './routes/ngo.routes.js'
 app.use("/api/user", userRouter)
+app.use("/api/ngo", ngoRouter)
