@@ -4,7 +4,9 @@ import dotenv from "dotenv"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 // import mongoose from "mongoose"
 import { transporter } from "../utils/nodemailer.js"
+import { User } from "../models/user.models.js"
 // import bcrypt from "bcrypt"
+
 
 dotenv.config({
     path: './.env'
@@ -51,6 +53,12 @@ const registerNgo = async (req, res) => {
             throw new Error('Email already exists');
         }
 
+        const ngoOwner = await User.findOne({ email });
+
+        if (!ngoOwner){
+            throw new Error('Email not found. Cannot Register!!');
+        }
+
         // if (!req.files) {
         //     throw new Error("Logo is required")
         // }
@@ -66,7 +74,7 @@ const registerNgo = async (req, res) => {
         const logo = await uploadOnCloudinary(logoLocalPath)
         // console.log(avatar)
         // const user = await User.create({ username, email, fullname, avatar, password });
-        const requiredFields = { name, email, owner, website, contact, address, location, logo: logo?.url || "", rating:0 };
+        const requiredFields = { name, email, ngoOwner, website, contact, address, location, logo: logo?.url || "", rating:0 };
         // const org = await Ngo.create({
             // requiredFields,
             // rating: 0,

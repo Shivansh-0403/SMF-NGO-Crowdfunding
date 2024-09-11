@@ -1,12 +1,20 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { setUser, setLoginStatus } from '../features/userSlice';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const [isLoggedIn, setLoggedIn] = useState(useSelector(state => state.userLoggedIn));  // Assuming the user is logged in initially
+    const isLoggedIn = useSelector(state => state.userLoggedIn);  // Assuming the user is logged in initially
     const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    // useEffect(() => {
+    //     isLoggedIn
+    // }, [handleLogout])
+    
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -14,12 +22,39 @@ const Navbar = () => {
 
     const handleClick = () => {
         if (isLoggedIn) {
-            setDropdownVisible(!isDropdownVisible);
+            setDropdownVisible(true);
+            setDropdownVisible(!isDropdownVisible)
         }
         else {
             navigate("/login");
+            setDropdownVisible(!isDropdownVisible)
         }
     };
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/api/user/logout');
+            // const { user, accessToken, refreshToken } = response.data;
+    
+            // localStorage.setItem('accessToken', accessToken);
+            // localStorage.setItem('refreshToken', refreshToken);
+    
+            const storeUser = {
+                name: "",
+                email: "",
+            };
+            // setUserData({ email: "", password: "" });
+    
+            dispatch(setUser(storeUser));
+            dispatch(setLoginStatus(false));
+            handleClick(e)
+            navigate("/");
+        } catch (error) {
+            console.error("Error: ", error);
+            window.alert(error.message || "Login failed. Please try again.");
+        }
+    }
 
     return (
         <nav className="relative bg-white shadow dark:bg-gray-800">
@@ -156,7 +191,8 @@ const Navbar = () => {
                                     <span className="mx-1">Your Transactions</span>
                                 </a>
 
-                                <a href="#" className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <a href="#" onClick={handleLogout}
+                                    className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" clipRule="evenodd" d="M7 2C5.34315 2 4 3.34315 4 5V19C4 20.6569 5.34315 22 7 22H17C18.6569 22 20 20.6569 20 19V5C20 3.34315 18.6569 2 17 2H7ZM6 5C6 4.44772 6.44772 4 7 4H17C17.5523 4 18 4.44772 18 5V19C18 19.5523 17.5523 20 17 20H7C6.44772 20 6 19.5523 6 19V5ZM8 6H10V18H8V6ZM16 6H14V18H16V6Z" fill="currentColor"></path>
                                     </svg>

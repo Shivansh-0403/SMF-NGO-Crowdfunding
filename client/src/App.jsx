@@ -13,8 +13,8 @@ import RegisterNgo from './pages/RegisterNgo'
 import { useSelector } from 'react-redux'
 
 function App() {
-  // const token = useSelector(state => state.userLoggedIn);
-  const token = true
+  const token = useSelector(state => state.userLoggedIn);
+  // const token = true
   return (
     <>
       <Navbar />
