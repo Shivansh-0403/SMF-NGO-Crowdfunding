@@ -61,11 +61,14 @@ function List() {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/ngo/list-ngos');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const result = await response.json();
-                setData(result); // Update state with the fetched data
+                // if (!response.ok) {
+                //     throw new Error(`HTTP error! status: ${response.status}`);
+                // }
+                const result = response.data;
+                console.log(result);
+                setData(result.data);
+                // console.log(result.data);
+                 // Update state with the fetched data
             } catch (err) {
                 // setError(err.message); // Handle error and update state
                 console.log(err.message);
@@ -84,13 +87,13 @@ function List() {
                         <div
                             className="w-1/3 bg-cover bg-center"
                             style={{
-                                backgroundImage: `url(${item.imageUrl})`,
+                                backgroundImage: `url(${item.logo})`,
                                 height: '150px'
                             }}
                         ></div>
                         <div className="w-2/3 p-4 md:p-4">
-                            <h1 className="text-xl font-bold text-gray-800 dark:text-white">{item.title}</h1>
-                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
+                            <h1 className="text-xl font-bold text-gray-800 dark:text-white">{item.name}</h1>
+                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.owner}</p>
                             <div className="flex mt-2 item-center">
                                 {[...Array(3)].map((_, i) => (
                                     <svg key={i} className="w-5 h-5 text-gray-700 fill-current dark:text-gray-300" viewBox="0 0 24 24">

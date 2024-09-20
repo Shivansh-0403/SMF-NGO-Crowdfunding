@@ -6,7 +6,7 @@ const Main_Header = () => {
             <div className="container px-6 py-16 mx-auto">
                 <div className="items-center lg:flex">
                     <div className="w-full lg:w-1/2">
-                        <div className="lg:max-w-lg">
+                        <div className="lg:max-w-lg  m-auto">
                             <h1 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
                                 Seva Mein Funds <br /> NGO{' '}
                                 <span className="text-blue-500">Crowdfunding Platform</span>
@@ -23,10 +23,10 @@ const Main_Header = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
+                    <div className="flex w-full mt-6 lg:mt-0 lg:w-1/4 m-auto">
                         <img
-                            className="w-full h-full lg:max-w-3xl"
-                            src="https://merakiui.com/images/components/Catalogue-pana.svg"
+                            className="rounded-full"
+                            src="https://yt3.googleusercontent.com/WhBUL2oB4yyjCYAtvcs2L8PKnpXqY0Fjc7VWwpr2nGSPzoMpQldUqge256f4Tx2ZbbaP-kY4LQ=s900-c-k-c0x00ffffff-no-rj"
                             alt="Catalogue-pana"
                         />
                     </div>

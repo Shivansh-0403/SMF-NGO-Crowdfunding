@@ -19,7 +19,7 @@ const list_all = async (req, res) => {
         // )
 
         const data = await Ngo.find();
-        console.log(data);
+        // console.log(data);
         console.log("All done");
         res.status(200).json({
             statusCode: 200,
@@ -27,10 +27,10 @@ const list_all = async (req, res) => {
             message: "User registration successful"
         });
     } catch (error) {
-        console.log("Error registering user: ", error.message);
+        console.log("Error - No NGOs: ", error.message);
         res.status(500).json({
             statusCode: 500,
-            message: "Error registering user: " + error.message
+            message: "Error - No NGOs: " + error.message
         });
     }
 }
@@ -63,7 +63,7 @@ const registerNgo = async (req, res) => {
         //     throw new Error("Logo is required")
         // }
 
-        const logoLocalPath = req.files?.logo[0]?.path
+        const logoLocalPath = req.file.path
         console.log(req.file);
         // const logoLocalPath = req.file.path
 
@@ -72,7 +72,7 @@ const registerNgo = async (req, res) => {
         // }
 
         const logo = await uploadOnCloudinary(logoLocalPath)
-        // console.log(avatar)
+        console.log(logo)
         // const user = await User.create({ username, email, fullname, avatar, password });
         const requiredFields = { name, email, ngoOwner, website, contact, address, location, logo: logo?.url || "", rating:0 };
         // const org = await Ngo.create({
