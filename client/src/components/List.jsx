@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import default_img from "../assets/home_icon.png"
+import { Link } from 'react-router-dom';
 
 function List() {
     // const items = [
@@ -84,16 +86,17 @@ function List() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {data.map((item, index) => (
                     <div key={index} className="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                        <div
+                        {/* <div
                             className="w-1/3 bg-cover bg-center"
                             style={{
                                 backgroundImage: `url(${item.logo})`,
                                 height: '150px'
                             }}
-                        ></div>
+                        ></div> */}
+                        <img src={item.logo !== "" ? item.logo : default_img} alt="" className="w-1/4 bg-cover bg-center h-1/3 m-auto" />
                         <div className="w-2/3 p-4 md:p-4">
                             <h1 className="text-xl font-bold text-gray-800 dark:text-white">{item.name}</h1>
-                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.owner}</p>
+                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.city}</p>
                             <div className="flex mt-2 item-center">
                                 {[...Array(3)].map((_, i) => (
                                     <svg key={i} className="w-5 h-5 text-gray-700 fill-current dark:text-gray-300" viewBox="0 0 24 24">
@@ -108,9 +111,9 @@ function List() {
                             </div>
                             <div className="flex justify-between mt-3 item-center">
                                 <h1 className="text-lg font-bold text-gray-700 dark:text-gray-200 md:text-xl">{item.price}</h1>
-                                <button className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
-                                    Add to Cart
-                                </button>
+                                <Link to="/details" className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
+                                    Show Details
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -180,12 +180,19 @@ const logoutUser = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
     const { email } = req.body;
+    console.log(email);
+    
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
                 return res.status(404).json("user does not exist");
             }
-            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 100000 })
+            console.log(user);
+            
+            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 1000000 })
+            console.log(token);
+            console.log("All good");
+            
 
             const mailOptions = {
                 from: {
@@ -198,7 +205,8 @@ const forgotPassword = async (req, res) => {
                 // html: "<h1>Hello World</h1><p>This is a test email.</p>",
             }
     
-
+            console.log("All good");
+            
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
@@ -208,6 +216,7 @@ const forgotPassword = async (req, res) => {
                 }
             });
 
+            console.log("All good");
         })
 }
 

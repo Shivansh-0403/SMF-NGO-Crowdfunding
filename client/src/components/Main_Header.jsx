@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import header_img from "../assets/sewa_parmo_dharm.jpg"
 
 const Main_Header = () => {
     return (
@@ -26,7 +27,7 @@ const Main_Header = () => {
                     <div className="flex w-full mt-6 lg:mt-0 lg:w-1/4 m-auto">
                         <img
                             className="rounded-full"
-                            src="https://yt3.googleusercontent.com/WhBUL2oB4yyjCYAtvcs2L8PKnpXqY0Fjc7VWwpr2nGSPzoMpQldUqge256f4Tx2ZbbaP-kY4LQ=s900-c-k-c0x00ffffff-no-rj"
+                            src={header_img}
                             alt="Catalogue-pana"
                         />
                     </div>

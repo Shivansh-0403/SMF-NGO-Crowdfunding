@@ -33,6 +33,9 @@ const ngoSchema = new Schema(
             type: String,
             required: [true, "Complete Address Required"],
         },
+        city: {
+            type: String
+        },
         location: {
             type: String,
             // required: true
