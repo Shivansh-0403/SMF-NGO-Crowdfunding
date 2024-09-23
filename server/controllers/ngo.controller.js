@@ -26,7 +26,32 @@ const list_all = async (req, res) => {
         res.status(200).json({
             statusCode: 200,
             data: data,
-            message: "User registration successful"
+            message: "Data Sent"
+        });
+    } catch (error) {
+        console.log("Error - No NGOs: ", error.message);
+        res.status(500).json({
+            statusCode: 500,
+            message: "Error - No NGOs: " + error.message
+        });
+    }
+}
+
+const list_details = async (req, res) => {
+    try {
+        console.log(req.params);
+        const { _id } = req.params;
+        const ngo = await Ngo.findById(_id)
+
+        // const data = await Ngo.find().select(
+        //     "-photos -email -address -contact -website"
+        // );
+        // console.log(data);
+        console.log("All done");
+        res.status(200).json({
+            statusCode: 200,
+            data: ngo,
+            message: "NGO Data Sent"
         });
     } catch (error) {
         console.log("Error - No NGOs: ", error.message);
@@ -149,5 +174,6 @@ const registerNgo = async (req, res) => {
 
 export {
     list_all,
+    list_details,
     registerNgo
 }

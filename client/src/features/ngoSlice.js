@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     ngo: {
+        _id: "",
         name: "",
         owner: "",
         email: "",
@@ -10,18 +11,17 @@ const initialState = {
         city: "",
         contact: "",
     },
-    // userLoggedIn: false
 };
 
 const ngoSlice = createSlice({
     name: 'ngo',
     initialState,
     reducers: {
-        setNgo: (state, action) => {
+        setNgoDetails: (state, action) => {
             state.ngo = action.payload;
         }
     }
 });
 
-export const { setNgo } = ngoSlice.actions;
+export const { setNgoDetails } = ngoSlice.actions;
 export default ngoSlice.reducer;
