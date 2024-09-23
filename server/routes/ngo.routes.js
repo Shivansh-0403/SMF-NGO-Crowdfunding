@@ -9,6 +9,10 @@ import { list_all, registerNgo } from "../controllers/ngo.controller.js";
 // router.route("/reset-password/:id/:token").post(resetPassword)
 
 router.route("/list-ngos").get(list_all)
-router.route("/register-ngo").post(upload.single("logo"), registerNgo)
+// router.route("/register-ngo").post(upload.single("logo"), registerNgo)
+router.route("/register-ngo").post(upload.fields([
+    { name: 'logo', maxCount: 1 },
+    { name: 'photos', maxCount: 10 } // Adjust maxCount as needed
+]), registerNgo);
 
 export default router

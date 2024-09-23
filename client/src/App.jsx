@@ -13,7 +13,7 @@ import RegisterNgo from './pages/RegisterNgo'
 import { useSelector } from 'react-redux'
 
 function App() {
-  const token = useSelector(state => state.userLoggedIn);
+  const token = useSelector(state => state.user.userLoggedIn);
   // const token = true
   return (
     <>

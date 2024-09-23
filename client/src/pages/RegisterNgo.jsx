@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function RegisterNgo() {
@@ -15,7 +16,9 @@ function RegisterNgo() {
         contact: "",
     });
 
-    const [file, setFile] = React.useState()
+    const [logo, setLogo] = React.useState(null); // For the logo file
+    const [photos, setPhotos] = React.useState([]); // For multiple photos
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNgoData((prevState) => ({
@@ -23,45 +26,66 @@ function RegisterNgo() {
             [name]: value,
         }));
     };
+
+    const handleLogoChange = (e) => {
+        setLogo(e.target.files[0]); // Handle single logo file
+    };
+
+    const handlePhotosChange = (e) => {
+        setPhotos(e.target.files); // Handle multiple photos
+    };
+
     const handleCancel = (e) => {
         e.preventDefault();
         setNgoData({ name: "", owner: "", email: "", website: "", address: "", city: "", contact: "" });
+        setLogo(null); // Reset logo
+        setPhotos([]); // Reset photos
         navigate("/");
-    }
+    };
+
+    const val = useSelector(state => state.user.user.email);
     const handleRegister = async (e) => {
         e.preventDefault();
-        // dispatch(register(ngoData))
-        // console.log("axaca");
 
         try {
             const formData = new FormData();
             formData.append("name", ngoData.name);
             formData.append("owner", ngoData.owner);
-            formData.append("email", ngoData.email);
+            formData.append("email", val);
             formData.append("website", ngoData.website);
             formData.append("address", ngoData.address);
             formData.append("city", ngoData.city);
             formData.append("contact", ngoData.contact);
-            formData.append("logo", file);
-            console.log(ngoData);
+
+            // Append logo
+            formData.append("logo", logo);
+
+            // Append multiple photos
+            Array.from(photos).forEach((photo) => {
+                formData.append("photos", photo);
+            });
+
             const response = await axios.post("/api/ngo/register-ngo", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            // console.log(response);
+
             if (!response.data) {
-                // console.log("HELLO");
                 throw response.message;
             }
             window.alert(response.data.message);
             navigate("/");
         } catch (error) {
             console.log("Error: ", error);
-            window.alert(error.response.data.message || "Something went wrong");
+            window.alert(error.response?.data?.message || "Something went wrong");
         }
+
         setNgoData({ name: "", owner: "", email: "", website: "", address: "", city: "", contact: "" });
+        setLogo(null);
+        setPhotos([]);
     };
+
     return (
         <div>
             <section className="max-w-full px-[25%] mx-auto bg-white shadow-md dark:bg-gray-800">
@@ -90,7 +114,7 @@ function RegisterNgo() {
                             />
                         </div>
 
-                        <div>
+                        {/* <div>
                             <label
                                 className="text-gray-700 dark:text-gray-200"
                                 htmlFor="email"
@@ -106,7 +130,7 @@ function RegisterNgo() {
                                 type="email"
                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                             />
-                        </div>
+                        </div> */}
 
                         <div>
                             <label
@@ -199,17 +223,29 @@ function RegisterNgo() {
                         </div>
 
                         <div>
-                            <label
-                                className="text-gray-700 dark:text-gray-200"
-                                htmlFor="logo"
-                            >
+                            <label className="text-gray-700 dark:text-gray-200" htmlFor="logo">
                                 Logo
                             </label>
                             <input
                                 name="logo"
                                 id="logo"
                                 type="file"
-                                onChange={(e) => setFile(e.target.files[0])}
+                                onChange={handleLogoChange}
+                                className="block w-full px-4 py-1.5 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                            />
+                        </div>
+
+                        {/* Multiple photos input */}
+                        <div>
+                            <label className="text-gray-700 dark:text-gray-200" htmlFor="photos">
+                                Photos of the NGO
+                            </label>
+                            <input
+                                name="photos"
+                                id="photos"
+                                type="file"
+                                multiple // Allow multiple file selection
+                                onChange={handlePhotosChange}
                                 className="block w-full px-4 py-1.5 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                             />
                         </div>

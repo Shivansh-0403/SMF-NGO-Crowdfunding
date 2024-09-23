@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import default_img from "../assets/home_icon.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function List() {
     // const items = [
@@ -56,23 +57,19 @@ function List() {
     //     // Add more items here as needed
     // ];
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [ngo, setNgo] = useState()
     const [data, setData] = useState([]);
-    // const [error, setError] = useState();
     useEffect(() => {
-        // Function to fetch data from the backend
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/ngo/list-ngos');
-                // if (!response.ok) {
-                //     throw new Error(`HTTP error! status: ${response.status}`);
-                // }
                 const result = response.data;
                 console.log(result);
                 setData(result.data);
                 // console.log(result.data);
-                 // Update state with the fetched data
             } catch (err) {
-                // setError(err.message); // Handle error and update state
                 console.log(err.message);
             }
         };
@@ -80,6 +77,12 @@ function List() {
         fetchData(); // Call the fetchData function as soon as the component mounts
     }, []);
 
+    const handleClick = (item) => {
+        // e.preventDefault();
+        setNgo(item);
+        dispatch(setNgoDetails(item));
+        navigate("/details");
+    }
 
     return (
         <div className="bg-gray-900 flex justify-center py-8">
@@ -111,9 +114,9 @@ function List() {
                             </div>
                             <div className="flex justify-between mt-3 item-center">
                                 <h1 className="text-lg font-bold text-gray-700 dark:text-gray-200 md:text-xl">{item.price}</h1>
-                                <Link to="/details" className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
+                                <button onClick={() => handleClick(item)} className="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">
                                     Show Details
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>

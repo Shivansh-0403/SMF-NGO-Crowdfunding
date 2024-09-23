@@ -18,7 +18,9 @@ const list_all = async (req, res) => {
         //     "-password -refreshToken"
         // )
 
-        const data = await Ngo.find();
+        const data = await Ngo.find().select(
+            "-photos -email -address -contact -website"
+        );
         // console.log(data);
         console.log("All done");
         res.status(200).json({
@@ -38,8 +40,7 @@ const list_all = async (req, res) => {
 const registerNgo = async (req, res) => {
     try {
         console.log(req.body);
-        const { name, email, owner, website, contact, address, location } = req.body;
-
+        const { name, owner, email, website, contact, address, city } = req.body;
 
         // for (const [key, value] of Object.entries(requiredFields)) {
         //     if (!value || value.trim() === "") {
@@ -47,39 +48,80 @@ const registerNgo = async (req, res) => {
         //     }
         // }
 
-        const existingUser = await Ngo.findOne({ email });
-
-        if (existingUser) {
-            throw new Error('Email already exists');
-        }
-
+        // console.log("Yes");
         const ngoOwner = await User.findOne({ email });
-
         if (!ngoOwner){
             throw new Error('Email not found. Cannot Register!!');
         }
+        // console.log("Yes");
+
+        const existingUser = await Ngo.findOne({ email: ngoOwner});
+
+        // console.log("Yes");
+        if (existingUser){
+            throw new Error('Email already exists');
+        }
+
+        // console.log("Yes");
 
         // if (!req.files) {
         //     throw new Error("Logo is required")
         // }
 
-        const logoLocalPath = req.file.path
-        console.log(req.file);
         // const logoLocalPath = req.file.path
+        // console.log(req.file);
+        // // const logoLocalPath = req.file.path
 
-        // if (!logoLocalPath) {
-        //     throw new Error("Logo is required")
-        // }
+        // // if (!logoLocalPath) {
+        // //     throw new Error("Logo is required")
+        // // }
 
-        const logo = await uploadOnCloudinary(logoLocalPath)
-        console.log(logo)
+        // const logo = await uploadOnCloudinary(logoLocalPath)
+        // console.log(logo)
+
+
+        let logoUrl = "";
+        if (req.files.logo && req.files.logo[0]) {
+            const logoLocalPath = req.files.logo[0].path;
+            const logo = await uploadOnCloudinary(logoLocalPath);
+            logoUrl = logo.url;
+        }
+
+        // console.log("Yes");
+
+        let photoUrls = [];
+        if (req.files.photos && req.files.photos.length > 0) {
+            for (let photo of req.files.photos) {
+                const photoLocalPath = photo.path;
+                const uploadedPhoto = await uploadOnCloudinary(photoLocalPath);
+                photoUrls.push(uploadedPhoto.url); // Save Cloudinary URL
+            }
+        }
+
+        // console.log("Yes");
+        console.log(ngoOwner);
+
+        // const requiredFields = { name, ngoOwner, owner, website, contact, address, location, logo: logo?.url || "", rating:0 };
+        const requiredFields = {
+            name,
+            // email,
+            email: ngoOwner,
+            owner,
+            website,
+            contact,
+            address,
+            city,
+            logo: logoUrl,
+            photos: photoUrls, // Array of photo URLs
+            rating: 0
+        };
+
         // const user = await User.create({ username, email, fullname, avatar, password });
-        const requiredFields = { name, email, ngoOwner, website, contact, address, location, logo: logo?.url || "", rating:0 };
         // const org = await Ngo.create({
-            // requiredFields,
-            // rating: 0,
-            // logo
-            // photos
+        // requiredFields,
+        // rating: 0,
+        // logo
+        // photos
         // })
 
         const org = await Ngo.create(requiredFields)
@@ -88,12 +130,12 @@ const registerNgo = async (req, res) => {
             throw new Error('Ngo registration unsuccessful');
         }
 
-        const createdOrg = await Ngo.findById(org._id)
+        // const createdOrg = await Ngo.findById(org._id)
 
         console.log("All done");
         res.status(200).json({
             statusCode: 200,
-            data: createdOrg,
+            // data: createdOrg,
             message: "NGO registration successful"
         });
     } catch (error) {

@@ -8,8 +8,7 @@ const ngoSchema = new Schema(
             index: true
         },
         owner: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
+            type: String,
             // required: true
         },
         logo: {
@@ -17,7 +16,8 @@ const ngoSchema = new Schema(
             // required: true,
         },
         email: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: "User",
             required: [true, "Email is Required"],
             unique: true,
         },
@@ -35,10 +35,6 @@ const ngoSchema = new Schema(
         },
         city: {
             type: String
-        },
-        location: {
-            type: String,
-            // required: true
         },
         rating: {
             type: Number,
