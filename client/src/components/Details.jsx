@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from 'react';
 // import Heading from './Ngo_Header';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+// import { useSelector } from 'react-redux';
+// import axios from 'axios';
 
-function Details() {
-    const ngo_id = useSelector(state => state.ngo.ngo._id)
-    const [data, setData] = useState();
-    const body = { _id: ngo_id }
+function Details(props) {
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                console.log(body);
-                const response = await axios.get(`/api/ngo/list-details/${ngo_id}`);
-                const result = response.data;
-                console.log(result);
-                setData(result.data);
-                // console.log(result.data);
-            } catch (err) {
-                console.log(err.message);
-            }
-        };
-
-        fetchData(); // Call the fetchData function as soon as the component mounts
-    }, []);
-
+        console.log(props);
+        
+    
+    //   return () => {
+    //     second
+    //   }
+    }, [])
+    
     return (
         <div>
             {/* <Heading /> */}
@@ -31,22 +20,32 @@ function Details() {
                 <dl className="divide-y divide-gray-100 text-md bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
                         <dt className="font-medium text-gray-900 dark:text-gray-100">Organization Name</dt>
-                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{data.name}</dd>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.name}</dd>
                     </div>
 
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
                         <dt className="font-medium text-gray-900 dark:text-gray-100">Owner</dt>
-                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{data.owner}</dd>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.owner}</dd>
                     </div>
 
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
-                        <dt className="font-medium text-gray-900 dark:text-gray-100"></dt>
-                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">Guitarist</dd>
+                        <dt className="font-medium text-gray-900 dark:text-gray-100">Website</dt>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.website}</dd>
                     </div>
 
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
-                        <dt className="font-medium text-gray-900 dark:text-gray-100">Salary</dt>
-                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">$1,000,000+</dd>
+                        <dt className="font-medium text-gray-900 dark:text-gray-100">Address</dt>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.address}</dd>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
+                        <dt className="font-medium text-gray-900 dark:text-gray-100">City</dt>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.city}</dd>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
+                        <dt className="font-medium text-gray-900 dark:text-gray-100">Contact</dt>
+                        <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.contact}</dd>
                     </div>
 
                     <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">

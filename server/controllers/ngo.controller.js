@@ -47,7 +47,7 @@ const list_details = async (req, res) => {
         //     "-photos -email -address -contact -website"
         // );
         // console.log(data);
-        console.log("All done");
+        console.log("All set");
         res.status(200).json({
             statusCode: 200,
             data: ngo,
