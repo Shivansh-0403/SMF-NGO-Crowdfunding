@@ -11,7 +11,7 @@ const Ngo_Header = (props) => {
                         // src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
                         alt="App preview"
                     />
-                    <h2 className="text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
+                    <h2 className="text-2xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
                         {props.name}
                     </h2>
                 {/* </div> */}

@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 
 function Details(props) {
-    useEffect(() => {
-        console.log(props);
+    // useEffect(() => {
+    //     console.log(props);
         
     
-    //   return () => {
-    //     second
-    //   }
-    }, [])
+    // //   return () => {
+    // //     second
+    // //   }
+    // }, [])
     
     return (
         <div>
@@ -48,14 +48,17 @@ function Details(props) {
                         <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">{props.data.contact}</dd>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
+                    {/* <div className="grid grid-cols-1 gap-1 p-3 even:bg-gray-100 even:dark:bg-gray-700 odd:bg-gray-300 odd:dark:bg-gray-600 sm:grid-cols-3 sm:gap-4">
                         <dt className="font-medium text-gray-900 dark:text-gray-100">Bio</dt>
                         <dd className="text-gray-700 dark:text-gray-300 sm:col-span-2">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facilis debitis explicabo
                             doloremque impedit nesciunt dolorem facere, dolor quasi veritatis quia fugit aperiam
                             aspernatur neque molestiae labore aliquam soluta architecto?
                         </dd>
-                    </div>
+                    </div> */}
+                    {/* <div>
+                        {props.data.photos.map()}
+                    </div> */}
                 </dl>
             </div>
         </div>
