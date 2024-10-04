@@ -65,7 +65,7 @@ function RegisterNgo() {
                 formData.append("photos", photo);
             });
 
-            const response = await axios.post("/api/ngo/register-ngo", formData, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/register-ngo`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

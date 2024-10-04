@@ -32,7 +32,7 @@ const Register = () => {
             formData.append('password', userData.password);
             // formData.append('avatar', file);
             console.log(formData);
-            const response = await axios.post('/api/user/register', userData);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, userData);
                 // , {
                 // headers: {
                 //     'Content-Type': 'multipart/form-data'

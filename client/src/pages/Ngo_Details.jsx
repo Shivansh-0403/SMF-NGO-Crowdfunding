@@ -13,7 +13,7 @@ function Ngo_Details() {
             try {
                 // console.log("hello");
                 console.log(ngo_id);
-                const response = await axios.get(`/api/ngo/list-details/${ngo_id}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}//api/ngo/list-details/${ngo_id}`);
                 const result = response.data;
                 // console.log(result);
                 setNgo(result.data);

@@ -19,7 +19,7 @@ function ResetPassword() {
                 password: password
             }
 
-            const response = await axios.post(`/api/user/reset-password/${id}/${token}`, reqBody)
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/reset-password/${id}/${token}`, reqBody)
             if (!response){
                 throw new Error("Failed..")
             }

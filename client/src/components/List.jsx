@@ -13,7 +13,7 @@ function List() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('/api/ngo/list-ngos');
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/list-ngos`);
                 const result = response.data;
                 console.log(result);
                 setData(result.data);

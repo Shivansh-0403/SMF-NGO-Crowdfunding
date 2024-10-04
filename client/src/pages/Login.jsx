@@ -23,7 +23,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/user/login', userData);
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, userData);
             const { user, accessToken, refreshToken } = response.data;
     
             localStorage.setItem('accessToken', accessToken);

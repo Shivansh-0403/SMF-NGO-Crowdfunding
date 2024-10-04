@@ -12,7 +12,7 @@ function ForgotPass() {
         email: mail
       }
 
-      const response = await axios.post('/api/user/forgot-password', reqBody)
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/forgot-password`, reqBody)
 
       console.log(response);
       window.alert("Mail has been sent succesfully")
