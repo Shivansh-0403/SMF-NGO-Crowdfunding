@@ -11,14 +11,26 @@ dotenv.config({
 })
 
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(cookieParser())
+
+const allowedOrigins = [
+    'http://localhost:5173',
+    process.env.CORS_ORIGIN
+];
+
 app.use(cors({
-    origin: ['http://localhost:5173', process.env.CORS_ORIGIN, "https://smf-ngo-crowdfunding.vercel.app/"],
-    // origin: process.env.CORS_ORIGIN,
-    // credentials: true
-}))
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // Only if you're using credentials like cookies
+}));
+
 
 // console.log(process.env.CORS_ORIGIN);
 
@@ -43,14 +55,14 @@ const connectDB = async () => {
 };
 
 connectDB()
-.then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+    .then(() => {
+        app.listen(process.env.PORT || 3000, () => {
+            console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error("MONGO db connection failed !!! ", err);
     });
-})
-.catch((err) => {
-    console.error("MONGO db connection failed !!! ", err);
-});
 
 
 import userRouter from './routes/user.routes.js'
