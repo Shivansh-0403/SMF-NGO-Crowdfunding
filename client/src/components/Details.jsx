@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from 'react';
-// import Heading from './Ngo_Header';
-// import { useSelector } from 'react-redux';
-// import axios from 'axios';
+import React, { useState } from 'react';
 
 function Details(props) {
-    // useEffect(() => {
-    //     console.log(props);
-        
-    
-    // //   return () => {
-    // //     second
-    // //   }
-    // }, [])
-    
     return (
         <div>
             {/* <Heading /> */}

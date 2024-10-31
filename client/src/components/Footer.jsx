@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -6,54 +7,46 @@ const Footer = () => {
             <div className="container px-6 py-8 mx-auto">
                 <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
                 <div className="flex flex-col items-center text-center">
-                    <a href="#">
+                    {/* <a href="#"> */}
                         <img
                             className="w-auto h-7"
                             src="https://merakiui.com/images/full-logo.svg"
                             alt="Logo"
                         />
-                    </a>
+                    {/* </a> */}
 
                     <div className="flex flex-wrap justify-center mt-6 -mx-4">
-                        <a
-                            href="#"
+                        <Link
+                            to="/"
                             className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                             aria-label="Home"
                         >
                             Home
-                        </a>
+                        </Link>
 
-                        <a
-                            href="#"
+                        <Link
+                            to="/about"
                             className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                             aria-label="About"
                         >
                             About
-                        </a>
+                        </Link>
 
-                        <a
-                            href="#"
+                        <Link
+                            to="/ngo-listings"
                             className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                             aria-label="Teams"
                         >
-                            Teams
-                        </a>
+                            Browse NGOs
+                        </Link>
 
-                        <a
-                            href="#"
+                        <Link
+                            to="/donate"
                             className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                             aria-label="Privacy"
                         >
-                            Privacy
-                        </a>
-
-                        <a
-                            href="#"
-                            className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
-                            aria-label="Cookies"
-                        >
-                            Cookies
-                        </a>
+                            Donate
+                        </Link>
                     </div>
                 </div>
 
@@ -61,7 +54,7 @@ const Footer = () => {
 
                 <div className="flex flex-col items-center sm:flex-row sm:justify-between">
                     <p className="text-sm text-gray-500 dark:text-gray-300">
-                        © Copyright 2021. All Rights Reserved.
+                        © Copyright 2024. All Rights Reserved.
                     </p>
 
                     <div className="flex -mx-2">
