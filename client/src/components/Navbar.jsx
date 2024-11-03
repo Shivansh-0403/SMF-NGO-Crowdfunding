@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useSelector , useDispatch} from 'react-redux';
+import { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser, setLoginStatus } from '../features/userSlice';
 
@@ -8,51 +8,87 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const isLoggedIn = useSelector(state => state.userLoggedIn);  // Assuming the user is logged in initially
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
-
-    // useEffect(() => {
-    //     isLoggedIn
-    // }, [handleLogout])
-    
+    const isLoggedIn = useSelector(state => state.user.userLoggedIn);  // Assuming the user is logged in initially
+    const [isDropdownVisible, setDropdownVisible] = useState('hidden');
+    const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleClick = () => {
-        if (isLoggedIn) {
-            setDropdownVisible(true);
-            setDropdownVisible(!isDropdownVisible)
-        }
-        else {
-            navigate("/login");
-            setDropdownVisible(!isDropdownVisible)
+    useEffect(() => {
+        // if (isLoggedIn === false){
+        //     document.getElementById("user-button").addEventListener('mousedown', () => {
+        //         navigate('/login');
+        //     })
+        // }
+        // else {
+        //     document.getElementById("user-button").addEventListener('mousedown', () => {
+        //         setDropdownVisible(isDropdownVisible === 'hidden' ? '' : 'hidden')
+        //     })
+        // }
+
+        const userButton = document.getElementById("user-button");
+
+        const handleClick = () => {
+            if (!isLoggedIn) {
+                navigate('/login');
+            } else {
+                setDropdownVisible(isDropdownVisible === 'hidden' ? '' : 'hidden');
+            }
+        };
+
+        userButton.addEventListener('mousedown', handleClick);
+
+        // Cleanup function to remove the event listener
+        return () => {
+            userButton.removeEventListener('mousedown', handleClick);
+        };
+    }, [isLoggedIn, navigate, isDropdownVisible])
+
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target) &&
+            buttonRef.current &&
+            !buttonRef.current.contains(event.target)
+        ) {
+            setDropdownVisible('hidden');
         }
     };
+
+    useEffect(() => {
+        // Add event listener for clicks outside
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Cleanup function to remove the event listener
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/user/logout');
-            // const { user, accessToken, refreshToken } = response.data;
-    
-            // localStorage.setItem('accessToken', accessToken);
-            // localStorage.setItem('refreshToken', refreshToken);
-    
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`);
+            console.log(response);
+            
             const storeUser = {
                 name: "",
                 email: "",
             };
-            // setUserData({ email: "", password: "" });
-    
+
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+
             dispatch(setUser(storeUser));
             dispatch(setLoginStatus(false));
-            handleClick(e)
             navigate("/");
         } catch (error) {
             console.error("Error: ", error);
-            window.alert(error.message || "Login failed. Please try again.");
+            window.alert(error.message || "Logout failed. Please try again.");
         }
     }
 
@@ -144,7 +180,9 @@ const Navbar = () => {
 
                         <div className="flex items-center mt-4 lg:mt-0">
                             <button
-                                onClick={handleClick}
+                                id='user-button'
+                                ref={buttonRef}
+                                // onClick={handleClick}
                                 type="button"
                                 className="flex items-center focus:outline-none"
                                 aria-label="toggle profile dropdown"
@@ -159,8 +197,9 @@ const Navbar = () => {
                             </button>
 
                             <div
+                                ref={dropdownRef}
                                 id="user-dropdown"
-                                className={`absolute right-0 z-20 w-56 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 ${isDropdownVisible ? '' : 'hidden'}`}
+                                className={`absolute right-0 z-20 w-56 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 ${isDropdownVisible}`}
                                 style={{ top: '100%' }}  // This moves the dropdown below the button
                             >
                                 <a href="#" className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -172,15 +211,6 @@ const Navbar = () => {
                                 </a>
 
                                 <hr className="border-gray-200 dark:border-gray-700" />
-
-                                {/* <a href="#" className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8C17 10.7614 14.7614 13 12 13C9.23858 13 7 10.7614 7 8ZM12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z" fill="currentColor"></path>
-                                        <path d="M6.34315 16.3431C4.84285 17.8434 4 19.8783 4 22H6C6 20.4087 6.63214 18.8826 7.75736 17.7574C8.88258 16.6321 10.4087 16 12 16C13.5913 16 15.1174 16.6321 16.2426 17.7574C17.3679 18.8826 18 20.4087 18 22H20C20 19.8783 19.1571 17.8434 17.6569 16.3431C16.1566 14.8429 14.1217 14 12 14C9.87827 14 7.84344 14.8429 6.34315 16.3431Z" fill="currentColor"></path>
-                                    </svg>
-
-                                    <span className="mx-1">View Profile</span>
-                                </a> */}
 
                                 <a href="#" className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
