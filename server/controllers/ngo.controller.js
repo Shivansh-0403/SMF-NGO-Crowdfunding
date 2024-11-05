@@ -67,25 +67,18 @@ const registerNgo = async (req, res) => {
         console.log(req.body);
         const { name, owner, email, website, contact, address, city } = req.body;
 
-        // for (const [key, value] of Object.entries(requiredFields)) {
-        //     if (!value || value.trim() === "") {
-        //         throw new Error(`The field '${key}' is required`);
-        //     }
-        // }
-
-        // console.log("Yes");
         const ngoOwner = await User.findOne({ email });
         if (!ngoOwner){
             throw new Error('Email not found. Cannot Register!!');
         }
         // console.log("Yes");
 
-        const existingUser = await Ngo.findOne({ email: ngoOwner});
+        // const existingUser = await Ngo.findOne({ email: ngoOwner});
 
-        // console.log("Yes");
-        if (existingUser){
-            throw new Error('Email already exists');
-        }
+        // // console.log("Yes");
+        // if (existingUser){
+        //     throw new Error('Email already exists');
+        // }
 
         // console.log("Yes");
 

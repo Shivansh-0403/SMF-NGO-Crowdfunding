@@ -15,7 +15,7 @@ import About from './pages/About'
 
 function App() {
   const token = useSelector(state => state.user.userLoggedIn);
-  // const token = true
+
   return (
     <>
       <Navbar />

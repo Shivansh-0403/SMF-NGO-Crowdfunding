@@ -15,11 +15,15 @@ const ngoSchema = new Schema(
             type: String,   // Cloudinary URL
             // required: true,
         },
+        // email: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: "User",
+            // required: [true, "Email is Required"],
+        //     // unique: true,
+        // },
         email: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
+            type: String,
             required: [true, "Email is Required"],
-            unique: true,
         },
         website: {
             type: String,

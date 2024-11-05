@@ -8,10 +8,12 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const isLoggedIn = useSelector(state => state.user.userLoggedIn);  // Assuming the user is logged in initially
+    const isLoggedIn = useSelector(state => state.user.userLoggedIn); 
     const [isDropdownVisible, setDropdownVisible] = useState('hidden');
     const dropdownRef = useRef(null);
     const buttonRef = useRef(null);
+
+    const user = useSelector(state => state.user.user)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -154,6 +156,7 @@ const Navbar = () => {
                             </Link>
                             <Link
                                 to="/about"
+                                // onClick={scrollToAbout}
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 About
@@ -181,7 +184,6 @@ const Navbar = () => {
                         <div className="flex items-center mt-4 lg:mt-0">
                             <button
                                 id='user-button'
-                                ref={buttonRef}
                                 // onClick={handleClick}
                                 type="button"
                                 className="flex items-center focus:outline-none"
@@ -205,8 +207,8 @@ const Navbar = () => {
                                 <a href="#" className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <img className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="jane avatar" />
                                     <div className="mx-1">
-                                        <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Jane Doe</h1>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">janedoe@exampl.com</p>
+                                        <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{user.name}</h1>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                                     </div>
                                 </a>
 
