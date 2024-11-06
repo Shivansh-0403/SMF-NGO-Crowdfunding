@@ -22,7 +22,7 @@ const list_all = async (req, res) => {
             "-photos -email -address -contact -website"
         );
         // console.log(data);
-        console.log("All done");
+        console.log("NGOs List Sent");
         res.status(200).json({
             statusCode: 200,
             data: data,
@@ -46,8 +46,8 @@ const list_details = async (req, res) => {
         // const data = await Ngo.find().select(
         //     "-photos -email -address -contact -website"
         // );
-        // console.log(data);
-        console.log("All set");
+        // console.log(ngo);
+        console.log("NGO Details Sent");
         res.status(200).json({
             statusCode: 200,
             data: ngo,
@@ -67,10 +67,10 @@ const registerNgo = async (req, res) => {
         console.log(req.body);
         const { name, owner, email, website, contact, address, city } = req.body;
 
-        const ngoOwner = await User.findOne({ email });
-        if (!ngoOwner){
-            throw new Error('Email not found. Cannot Register!!');
-        }
+        // const ngoOwner = await User.findOne({ email });
+        // if (!ngoOwner){
+        //     throw new Error('Email not found. Cannot Register!!');
+        // }
         // console.log("Yes");
 
         // const existingUser = await Ngo.findOne({ email: ngoOwner});
@@ -117,13 +117,13 @@ const registerNgo = async (req, res) => {
         }
 
         // console.log("Yes");
-        console.log(ngoOwner);
+        // console.log(ngoOwner);
 
         // const requiredFields = { name, ngoOwner, owner, website, contact, address, location, logo: logo?.url || "", rating:0 };
         const requiredFields = {
             name,
             // email,
-            email: ngoOwner,
+            email,
             owner,
             website,
             contact,

@@ -10,6 +10,8 @@ const initialState = {
         address: "",
         city: "",
         contact: "",
+        logo: "",
+        photos: [],
     },
 };
 

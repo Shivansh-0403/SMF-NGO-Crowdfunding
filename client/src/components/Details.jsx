@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function Details(props) {
+    const [showAll, setShowAll] = useState(true);
+    // const imagesToDisplay = showAll ? props.data.photos : props.data.photos;
+    // console.log(props.data.photos);
+
+    console.log(props);
+    const images = props.data.photos
+    // const images = useSelector(state => state.ngo.ngo.photos);
+    // console.log(useSelector(state => state.ngo.ngo));
+
     return (
         <div>
             {/* <Heading /> */}
@@ -48,6 +58,30 @@ function Details(props) {
                         {props.data.photos.map()}
                     </div> */}
                 </dl>
+
+                <div className=" my-8">
+                    <div className="grid grid-cols-4 gap-4">
+                        {images?.map((photo, index) => (
+                            <img
+                                key={index}
+                                src={photo}
+                                alt={`Photo ${index + 1}`}
+                                className="w-full h-full object-cover rounded-lg"
+                            />
+                        ))}
+                    </div>
+
+                    {!showAll && (
+                        <div className="text-right mt-4">
+                            <button
+                                onClick={() => setShowAll(true)}
+                                className="text-blue-500 hover:underline"
+                            >
+                                Show More
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

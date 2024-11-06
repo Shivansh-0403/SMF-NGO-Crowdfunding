@@ -28,6 +28,7 @@ function List() {
 
     const handleClick = (item) => {
         // e.preventDefault();
+        console.log(item);
         setNgo(item);
         dispatch(setNgoDetails(item));
         navigate("/details");
@@ -38,8 +39,8 @@ function List() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {data.map((item, index) => (
                     <div key={index} className="flex max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                        <img src={item.logo !== "" ? item.logo : default_img} alt="" className="w-1/33 bg-cover bg-center h-1/2 m-auto" />
-                        <div className="w-2/3 p-4 md:p-4 flex flex-col justify-between">
+                        <img src={item.logo !== "" ? item.logo : default_img} alt="" className="w-20 rounded-md ml-4 bg-cover bg-center m-auto" />
+                        <div className="w-2/3 p-4 md:p-4 flex flex-col gap-2 justify-between">
                             <h1 className="text-xl font-bold text-gray-800 dark:text-white truncate">{item.name}</h1>
                             <p className="text-sm text-gray-600 dark:text-gray-400">{item.city}</p>
                             <div>

@@ -2,22 +2,25 @@ import React, { useEffect, useState } from 'react'
 import Details from '../components/Details'
 import Ngo_Header from '../components/Ngo_Header'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNgoDetails } from '../features/ngoSlice'
 
 function Ngo_Details() {
     const ngo_id = useSelector(state => state.ngo.ngo._id)
     const [ngo, setNgo] = useState({});
-    // const body = { _id: ngo_id }
+    const dispatch = useDispatch()
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // console.log("hello");
+                console.log("hello");
                 console.log(ngo_id);
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/list-details/${ngo_id}`);
                 const result = response.data;
-                // console.log(result);
                 setNgo(result.data);
                 // console.log(result.data);
+                setNgoDetails(result.data);
+                console.log(ngo);
             } catch (err) {
                 console.log(err.message);
             }

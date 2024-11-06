@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser, setLoginStatus } from '../features/userSlice';
+// import logo_light from "../images/smf_light.png"
+import logo_dark from "../images/smf_dark2.png"
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -101,8 +103,9 @@ const Navbar = () => {
                     <div className="flex items-center justify-between">
                         <Link to="/">
                             <img
-                                className="w-auto h-6 sm:h-7"
-                                src="https://merakiui.com/images/full-logo.svg"
+                                className="w-24 ml-10 object-cover object-center scale-125 rounded-lg"
+                                // className="w-auto h-6 sm:h-7"
+                                src={logo_dark}
                                 alt="Logo"
                             />
                         </Link>

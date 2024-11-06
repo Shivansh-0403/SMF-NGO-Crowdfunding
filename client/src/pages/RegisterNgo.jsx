@@ -43,7 +43,7 @@ function RegisterNgo() {
         navigate("/");
     };
 
-    const val = useSelector(state => state.user.user.email);
+    const email = useSelector(state => state.user.user.email);
     const handleRegister = async (e) => {
         e.preventDefault();
 
@@ -51,7 +51,7 @@ function RegisterNgo() {
             const formData = new FormData();
             formData.append("name", ngoData.name);
             formData.append("owner", ngoData.owner);
-            formData.append("email", val);
+            formData.append("email", email);
             formData.append("website", ngoData.website);
             formData.append("address", ngoData.address);
             formData.append("city", ngoData.city);
