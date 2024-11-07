@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function Details(props) {
-    const [showAll, setShowAll] = useState(true);
-    // const imagesToDisplay = showAll ? props.data.photos : props.data.photos;
+    const [showAll, setShowAll] = useState(false);
+    const images = showAll ? props.data.photos : props.data.photos.slice(0, 4);
     // console.log(props.data.photos);
 
-    console.log(props);
-    const images = props.data.photos
+    // console.log(props);
+    // const images = props.data.photos
     // const images = useSelector(state => state.ngo.ngo.photos);
     // console.log(useSelector(state => state.ngo.ngo));
 
@@ -62,14 +62,29 @@ function Details(props) {
                 <div className=" my-8">
                     <div className="grid grid-cols-4 gap-4">
                         {images?.map((photo, index) => (
-                            <img
+                            <div
                                 key={index}
-                                src={photo}
-                                alt={`Photo ${index + 1}`}
-                                className="w-full h-full object-cover rounded-lg"
-                            />
+                                className="relative w-full h-40 rounded-lg overflow-hidden bg-gray-200"
+                            >
+                                <img
+                                    src={photo}
+                                    alt={`Photo ${index + 1}`}
+                                    className="absolute inset-0 w-full h-full object-cover object-center rounded-lg"
+                                />
+                            </div>
                         ))}
                     </div>
+
+                    {showAll && (
+                        <div className="text-right mt-4">
+                            <button
+                                onClick={() => setShowAll(false)}
+                                className="text-blue-500 hover:underline"
+                            >
+                                Show Less
+                            </button>
+                        </div>
+                    )}
 
                     {!showAll && (
                         <div className="text-right mt-4">

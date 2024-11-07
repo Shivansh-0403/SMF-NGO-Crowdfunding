@@ -39,7 +39,7 @@ const list_all = async (req, res) => {
 
 const list_details = async (req, res) => {
     try {
-        console.log(req.params);
+        // console.log(req.params);
         const { _id } = req.params;
         const ngo = await Ngo.findById(_id)
 
