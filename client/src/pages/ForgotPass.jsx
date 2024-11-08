@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import logo_dark from "../images/smf_dark2.png"
 
 function ForgotPass() {
   const [mail, setMail] = React.useState()
@@ -26,7 +27,7 @@ function ForgotPass() {
       <div className="w-full max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="px-6 py-4">
           <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+            <img className="w-32" src={logo_dark} alt="SMF Logo" />
           </div>
 
           <h3 className="my-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Forgot Password</h3>

@@ -44,7 +44,7 @@ function About() {
           </div>
         </div>
       </div>
-      <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
+      <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700 mx-7" />
     </div>
   )
 }

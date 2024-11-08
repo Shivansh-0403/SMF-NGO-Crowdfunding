@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 
 function Details(props) {
     const [showAll, setShowAll] = useState(false);
-    const images = showAll ? props.data.photos : props.data.photos.slice(0, 4);
+    // const images = showAll ? props.data.photos : props.data.photos.slice(0, 4);
+    const images = showAll ? (props.data.photos || []) : (props.data.photos || []).slice(0, 4);
+
     // console.log(props.data.photos);
 
     // console.log(props);

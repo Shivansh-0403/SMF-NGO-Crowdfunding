@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+// import logo_dark from "../images/smf_dark2.png";
+import img from "../images/mission2.jpeg"
 
 const Register = () => {
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
     const [userData, setUserData] = React.useState({
         email: "",
         name: "",
         password: ""
-    })
+    });
 
-    // const [file, setFile] = React.useState()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevState => ({
@@ -19,94 +19,82 @@ const Register = () => {
             [name]: value
         }));
     };
+
     const handleRegister = async (e) => {
-        e.preventDefault()
-        // dispatch(register(userData))
-        // console.log("axaca");
+        e.preventDefault();
 
         try {
-            const formData = new FormData();
-            // formData.append('username', userData.username);
-            formData.append('email', userData.email);
-            formData.append('name', userData.name);
-            formData.append('password', userData.password);
-            // formData.append('avatar', file);
-            console.log(formData);
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, userData);
-                // , {
-                // headers: {
-                //     'Content-Type': 'multipart/form-data'
-                // }
-                // }
-            // )
-            console.log(response);
-            if (!response.data) {
-                console.log("HELLO");
-                throw response.message
-            }
-            window.alert(response.data.message)
-            navigate("/login")
+            if (!response.data) throw response.message;
+            window.alert(response.data.message);
+            navigate("/login");
         } catch (error) {
             console.log("Error: ", error);
-            window.alert(error.response.data.message || "Something went wrong")
+            window.alert(error.response?.data?.message || "Something went wrong");
         }
-        setUserData({ name: "", email: "", password: "" })
-    }
+        setUserData({ name: "", email: "", password: "" });
+    };
+
     return (
-        <section className="bg-white dark:bg-gray-900">
-            <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-                <form className="w-full max-w-md">
-                    <div className="flex justify-center mx-auto">
-                        <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+        <section className="flex items-center justify-center h-[85vh] bg-white dark:bg-gray-900">
+            {/* Left Section with Image */}
+            <div className="flex-1 hidden md:flex items-center justify-center bg-cover bg-center">
+                <div className="bg-white dark:bg-gray-900 bg-opacity-40 w-full h-full flex items-center justify-center">
+                    <img src={img} alt="Logo" className="w-2/5 h-auto rounded-lg" />
+                </div>
+            </div>
+
+            <div className="w-[2px] h-[75%] bg-gray-300 dark:bg-gray-700 mx-4"></div>
+
+            {/* Right Section with Form */}
+            <div className="flex-1 flex items-center justify-center p-6">
+                <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg dark:bg-gray-800">
+                    <div className="text-center">
+                        <h2 className="text-2xl font-semibold text-gray-700 dark:text-white mb-6">Sign Up</h2>
                     </div>
 
-                    <div className="flex items-center justify-center mt-6">
-                        <a href="/register" className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white">
-                            sign up
-                        </a>
-                    </div>
-
-                    <div className="relative flex items-center mt-8 flex-col gap-5">
+                    <div className="relative flex flex-col gap-4 mt-6">
                         <input
-                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text"
+                            type="text"
                             name="email"
                             id="email"
-                            placeholder='Enter your email id'
+                            placeholder="Enter your email"
                             value={userData.email}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
+                        />
 
                         <input
-                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text"
+                            type="text"
                             name="name"
                             id="name"
-                            placeholder='Enter your name'
+                            placeholder="Enter your name"
                             value={userData.name}
-                            onChange={handleChange} />
+                            onChange={handleChange}
+                            className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
+                        />
 
                         <input
-                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="password"
+                            type="password"
                             name="password"
                             id="password"
-                            placeholder='Enter Your password'
+                            placeholder="Enter your password"
                             value={userData.password}
-                            onChange={handleChange} />
-
-                        {/* <input
-                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="file"
-                            name="avatar"
-                            id="avatar"
-                            onChange={(e) => setFile(e.target.files[0])} /> */}
+                            onChange={handleChange}
+                            className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
+                        />
                     </div>
 
-                    {/* Other form fields */}
-
                     <div className="mt-6">
-                        <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                        onClick={handleRegister} >
+                        <button
+                            type="submit"
+                            onClick={handleRegister}
+                            className="w-full px-6 py-3 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300"
+                        >
                             Sign Up
                         </button>
 
-                        <div className="mt-6 text-center">
+                        <div className="mt-4 text-center">
                             <Link to="/login" className="text-sm text-blue-500 hover:underline dark:text-blue-400">
                                 Already have an account?
                             </Link>

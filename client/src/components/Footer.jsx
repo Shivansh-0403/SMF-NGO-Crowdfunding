@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-white dark:bg-gray-800 mt-6">
             <div className="container px-6 py-8 mx-auto">
-                {/* <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" /> */}
+                {/* <hr className="border-gray-200 md:my-10 dark:border-gray-700" /> */}
                 <div className="flex flex-col items-center text-center">
                     {/* <a href="#"> */}
                         <img

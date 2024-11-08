@@ -19,8 +19,8 @@ function Ngo_Details() {
                 const result = response.data;
                 setNgo(result.data);
                 // console.log(result.data);
-                setNgoDetails(result.data);
-                console.log(ngo);
+                dispatch(setNgoDetails(result.data));
+                // console.log(ngo);
             } catch (err) {
                 console.log(err.message);
             }

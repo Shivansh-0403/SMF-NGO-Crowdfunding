@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser, setLoginStatus } from '../features/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import logo_dark from "../images/smf_dark2.png"
 
 const Login = () => {
     const navigate = useNavigate();
@@ -44,11 +45,11 @@ const Login = () => {
         setUserData({ email: "", password: "" });
     };
     return (
-        <div className="flex items-center justify-center h-screen dark:bg-slate-900">
+        <div className="flex items-center justify-center h-[85vh] dark:bg-slate-900">
             <div className="w-full max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <div className="px-6 py-4">
                     <div className="flex justify-center mx-auto">
-                        <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+                        <img className="w-32" src={logo_dark} alt="SMF Logo" />
                     </div>
 
                     <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Welcome Back</h3>

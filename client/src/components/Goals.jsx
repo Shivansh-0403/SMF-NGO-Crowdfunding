@@ -3,9 +3,10 @@ import domains from '../static/contents'
 
 function Goals() {
     return (
-        <div className='dark:bg-slate-900'>
+        <div className='dark:bg-gray-900'>
+            {/* <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" /> */}
             <div className="text-center mt-10 my-5">
-                <h2 className="text-3xl font-medium dark:text-blue-500">Our Features</h2>
+                <h2 className="text-3xl dark:text-blue-400">Areas of Work</h2>
             </div>
             <div className="text-center text-gray-300 text-lg mb-5">
                 Empowering communities through sustainable initiatives, our NGO is dedicated to creating positive social impact.
