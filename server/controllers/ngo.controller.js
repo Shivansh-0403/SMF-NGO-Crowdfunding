@@ -37,6 +37,33 @@ const list_all = async (req, res) => {
     }
 }
 
+const list_user_ngos = async (req, res) => {
+    try {
+        // const createdUser = await User.findById(user._id).select(
+        //     "-password -refreshToken"
+        // )
+
+        const { email } = req.params
+
+        const data = await Ngo.find( {email} ).select(
+            "-photos -email -address -contact -website"
+        );
+        // console.log(data);
+        console.log("User NGOs Sent");
+        res.status(200).json({
+            statusCode: 200,
+            data: data,
+            message: "Data Sent"
+        });
+    } catch (error) {
+        console.log("Error - No NGOs: ", error.message);
+        res.status(500).json({
+            statusCode: 500,
+            message: "Error - No NGOs: " + error.message
+        });
+    }
+}
+
 const list_details = async (req, res) => {
     try {
         // console.log(req.params);
@@ -168,5 +195,6 @@ const registerNgo = async (req, res) => {
 export {
     list_all,
     list_details,
-    registerNgo
+    registerNgo,
+    list_user_ngos
 }

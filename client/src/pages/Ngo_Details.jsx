@@ -7,27 +7,27 @@ import { setNgoDetails } from '../features/ngoSlice'
 
 function Ngo_Details() {
     const ngo_id = useSelector(state => state.ngo.ngo._id)
-    const [ngo, setNgo] = useState({});
+    const [ngo, setNgo] = useState(useSelector(state => state.ngo.ngo));
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                console.log("hello");
-                console.log(ngo_id);
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/list-details/${ngo_id}`);
-                const result = response.data;
-                setNgo(result.data);
-                // console.log(result.data);
-                dispatch(setNgoDetails(result.data));
-                // console.log(ngo);
-            } catch (err) {
-                console.log(err.message);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             console.log("hello");
+    //             console.log(ngo_id);
+    //             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/list-details/${ngo_id}`);
+    //             const result = response.data;
+    //             setNgo(result.data);
+    //             // console.log(result.data);
+    //             dispatch(setNgoDetails(result.data));
+    //             // console.log(ngo);
+    //         } catch (err) {
+    //             console.log(err.message);
+    //         }
+    //     };
 
-        fetchData(); // Call the fetchData function as soon as the component mounts
-    }, []);
+    //     fetchData(); // Call the fetchData function as soon as the component mounts
+    // }, []);
 
     return (
         <div>
