@@ -8,16 +8,15 @@ import { setNgoDetails } from '../features/ngoSlice';
 function List() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const [ngo, setNgo] = useState()
+
     const [data, setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ngo/list-ngos`);
                 const result = response.data;
-                console.log(result);
+                // console.log(result);
                 setData(result.data);
-                // console.log(result.data);
             } catch (err) {
                 console.log(err.message);
             }
@@ -27,9 +26,7 @@ function List() {
     }, []);
 
     const handleClick = (item) => {
-        // e.preventDefault();
-        console.log(item);
-        // setNgo(item);
+        // console.log(item);
         dispatch(setNgoDetails(item));
         navigate("/details");
     }

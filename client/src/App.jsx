@@ -13,41 +13,10 @@ import RegisterNgo from './pages/RegisterNgo'
 import { useSelector } from 'react-redux'
 import About from './pages/About'
 import Profile from './pages/Profile'
-
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
-const stripePromise = loadStripe(import.meta.env.VITE_BACKEND_URL);
+import Donate from './pages/Donate'
 
 function App() {
   const token = useSelector(state => state.user.userLoggedIn);
-  // const [clientSecret, setClientSecret] = useState("");
-  // const [dpmCheckerLink, setDpmCheckerLink] = useState("");
-
-  // useEffect(() => {
-  //   // Create PaymentIntent as soon as the page loads
-  //   fetch("/create-payment-intent", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ items: [{ id: "xl-tshirt", amount: 1000 }] }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setClientSecret(data.clientSecret);
-  //       // [DEV] For demo purposes only
-  //       setDpmCheckerLink(data.dpmCheckerLink);
-  //     });
-  // }, []);
-
-  const appearance = {
-    theme: 'stripe',
-    variables: {
-      colorPrimary: '#1623d4',
-      colorText: '#000000',
-    },
-  };
-  // Enable the skeleton loader UI for optimal loading.
-  const loader = 'auto';
   return (
     <>
       <Navbar />
@@ -57,10 +26,10 @@ function App() {
         <Route path='/details' element={<Ngo_Details />} ></Route>
         <Route path='/about' element={<About />} ></Route>
 
-        {/* {token && <Route path='/register-ngo' element={<RegisterNgo />}></Route>} */}
+        {token && <Route path='/register-ngo' element={<RegisterNgo />}></Route>}
         <Route path="/register-ngo" element={<Navigate replace to="/login" />} />
-
-        {/* {token && <Route path='/donate' element={<Donate />}></Route>} */}
+        
+        {token && <Route path='/donate' element={<Donate />}></Route>}
         <Route path="/donate" element={<Navigate replace to="/login" />} />
 
         <Route path="/register" element={<Register />} />

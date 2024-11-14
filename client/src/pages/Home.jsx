@@ -7,10 +7,10 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { setScrollTarget, clearScrollTarget } from '../features/scrollSlice';
 
 function Home() {
-    const aboutRef = useRef(null);
+    // const aboutRef = useRef(null);
 
     // const targetSection = useSelector(state => state.scroll.targetSection);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // useEffect(() => {
     //     if (targetSection === 'aboutSection' && aboutRef.current) {
@@ -22,7 +22,7 @@ function Home() {
     return (
         <div>
             <Header></Header>
-            <About ref={aboutRef}></About>
+            <About></About>
             <Goals></Goals>
             {/* <Topngo></Topngo> */}
         </div>
