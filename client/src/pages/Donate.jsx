@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Donate() {
     const ngo = useSelector(state => state.ngo.ngo);
     const user = useSelector(state => state.user.user);
+
+    const navigate = useNavigate()
 
     const [data, setData] = useState({
         add1: "",
@@ -21,8 +24,48 @@ function Donate() {
         }));
     }
 
-    const handleDonate = () => {
+    const handleDonate = async (e) => {
+        e.preventDefault();
+        try {
+            // Fetch Razorpay key
+            const { data: { key } } = await axios.get("http://localhost:3000/api/payment/getkey");
+    
+            // Create an order in the backend
+            const { data: { order } } = await axios.post("http://localhost:3000/api/payment/checkout", { amount: data.amount });
+    
+            // Razorpay options
+            const options = {
+                key,
+                amount: order.amount,
+                currency: "INR",
+                name: ngo.name,
+                description: "Donation",
+                image: ngo.logo,
+                order_id: order.id,
+                callback_url: "http://localhost:3000/api/payment/paymentverification",
+                prefill: {
+                    name: ngo.name,
+                    email: ngo.email,
+                    contact: ngo.contact
+                },
+                notes: {
+                    "address": "Razorpay Corporate Office"
+                },
+                theme: {
+                    color: "#121212"
+                }
+            };
+    
+            // Open Razorpay checkout
+            const razor = new window.Razorpay(options);
+            razor.open();
+            razor.close();
 
+            if (order.status === 'created') navigate('/payment-success')
+            else navigate('payment-failure')
+        } catch (error) {
+            console.error("Error during donation process:", error.message || error);
+        }
     }
 
     return (
@@ -69,7 +112,7 @@ function Donate() {
                             name="add1"
                             id="add1"
                             placeholder="Address Line 1"
-                            // value={userData.email}
+                            value={data.add1}
                             onChange={handleChange}
                             className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
                         />
@@ -79,7 +122,7 @@ function Donate() {
                             name="add2"
                             id="add2"
                             placeholder="Address Line 2"
-                            // value={userData.name}
+                            value={data.add2}
                             onChange={handleChange}
                             className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
                         />
@@ -89,7 +132,7 @@ function Donate() {
                             name="city"
                             id="city"
                             placeholder="City"
-                            // value={userData.name}
+                            value={data.city}
                             onChange={handleChange}
                             className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
                         />
@@ -99,7 +142,7 @@ function Donate() {
                             name="amount"
                             id="amount"
                             placeholder="Enter Donation Amount"
-                            // value={userData.password}
+                            value={data.amount}
                             onChange={handleChange}
                             className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
                         />

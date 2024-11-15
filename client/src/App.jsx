@@ -14,9 +14,12 @@ import { useSelector } from 'react-redux'
 import About from './pages/About'
 import Profile from './pages/Profile'
 import Donate from './pages/Donate'
+import PaymentSuccess from './pages/PaymentSuccess'
 
 function App() {
   const token = useSelector(state => state.user.userLoggedIn);
+  // const ngo_token = useSelector(state => state.ngo.ngo._id);
+
   return (
     <>
       <Navbar />
@@ -40,14 +43,8 @@ function App() {
         {token && <Route path='/profile' element={<Profile />}></Route>}
         <Route path="/profile" element={<Navigate replace to="/login" />} />
 
-        {/* {clientSecret && (
-          <Elements options={{clientSecret, appearance, loader}} stripe={stripePromise}>
-            <Routes>
-              <Route path="/checkout" element={<CheckoutForm dpmCheckerLink={dpmCheckerLink}/>} />
-              <Route path="/complete" element={<CompletePage />} />
-            </Routes>
-          </Elements>
-        )} */}
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+
       </Routes>
       <Footer />
     </>

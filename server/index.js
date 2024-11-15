@@ -31,12 +31,6 @@ app.use(cors({
     credentials: true, // Only if you're using credentials like cookies
 }));
 
-
-// console.log(process.env.CORS_ORIGIN);
-
-
-// app.use(express.json({limit: "16kb"}))
-
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -64,11 +58,19 @@ connectDB()
         console.error("MONGO db connection failed !!! ", err);
     });
 
+import Razorpay from "razorpay";
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET,
+});
 
 import userRouter from './routes/user.routes.js'
 import ngoRouter from './routes/ngo.routes.js'
+import paymentRouter from './routes/payment.routes.js'
+
 app.use("/api/user", userRouter)
 app.use("/api/ngo", ngoRouter)
+app.use("/api/payment", paymentRouter)
 
 // import Stripe from 'stripe';
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
