@@ -7,8 +7,6 @@ function Donate() {
     const ngo = useSelector(state => state.ngo.ngo);
     const user = useSelector(state => state.user.user);
 
-    const navigate = useNavigate()
-
     const [data, setData] = useState({
         add1: "",
         add2: "",
@@ -31,7 +29,12 @@ function Donate() {
             const { data: { key } } = await axios.get("http://localhost:3000/api/payment/getkey");
     
             // Create an order in the backend
-            const { data: { order } } = await axios.post("http://localhost:3000/api/payment/checkout", { amount: data.amount });
+            const { data: { order } } = await axios.post("http://localhost:3000/api/payment/checkout", 
+                                        { 
+                                            amount: data.amount,
+                                            ngo : { _id: ngo._id, name: ngo.name, email: ngo.email },
+                                            user : { name: user.name, email: user.email }
+                                        });
     
             // Razorpay options
             const options = {
@@ -59,10 +62,6 @@ function Donate() {
             // Open Razorpay checkout
             const razor = new window.Razorpay(options);
             razor.open();
-            razor.close();
-
-            if (order.status === 'created') navigate('/payment-success')
-            else navigate('payment-failure')
         } catch (error) {
             console.error("Error during donation process:", error.message || error);
         }

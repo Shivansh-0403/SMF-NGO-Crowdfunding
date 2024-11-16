@@ -14,39 +14,22 @@ dotenv.config({
 const registerUser = async (req, res) => {
     try {
         console.log(req.body);
-        const { email, name, password } = req.body;
+        const { email, name, password, contact } = req.body;
 
-        if (name == "" || email == "" || password == "") {
+        if (name == "" || email == "" || password == "" || contact == "") {
             throw new Error("All fields are required");
         }
 
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            throw new Error('Email is already in use');
+            throw new Error('Email already in use');
         }
 
-        // if (!req.files) {
-        //     throw new Error("Avatar is required")
-        // }
-
-        // const avatarLocalPath = req.files?.avatar[0]?.path
-        // console.log(req.file);
-        // const avatarLocalPath = req.file.path
-
-        // if (!avatarLocalPath) {
-        //     throw new Error("Avatar file is required")
-        // }
-
-        // const avatar = await uploadOnCloudinary(avatarLocalPath)
-        // console.log(avatar)
-        // const user = await User.create({ username, email, fullname, avatar, password });
         const user = await User.create({
             name,
             email,
-            // type,
-            // avatar: avatar?.url || "",
-            // creations: [],
+            contact,
             password
         })
 
@@ -58,7 +41,7 @@ const registerUser = async (req, res) => {
             "-password -refreshToken"
         )
 
-        console.log("All done");
+        console.log("User registration successful");
         res.status(200).json({
             statusCode: 200,
             data: createdUser,
@@ -105,15 +88,14 @@ const loginUser = async (req, res) => {
             secure: true
         }
 
-        console.log("Successful login");
-        console.log(accessToken);
-        console.log(refreshToken);
+        console.log("User Login Successful");
+
         res.status(200)
             .cookie("accessToken", accessToken, options)
             .cookie("refreshToken", refreshToken, options)
             .json({
                 user: loggedInUser, accessToken, refreshToken,
-                message: "Login done"
+                message: "Login successful"
             }
             )
     } catch (error) {
@@ -125,17 +107,17 @@ const loginUser = async (req, res) => {
 }
 
 const logoutUser = async (req, res) => {
-    // console.log(req.cookies?.accessToken);
-    // console.log(req.cookies?.refreshToken);
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
-        // console.log(token);
+        console.log(token);
         if (!token) {
             throw new Error("Unauthorized request");
         }
 
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+        console.log(decodedToken);
 
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken");
 
@@ -192,7 +174,6 @@ const forgotPassword = async (req, res) => {
             const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 1000000 })
             console.log(token);
             console.log("All good");
-            
 
             const mailOptions = {
                 from: {

@@ -17,7 +17,10 @@ import Donate from './pages/Donate'
 import PaymentSuccess from './pages/PaymentSuccess'
 
 function App() {
-  const token = useSelector(state => state.user.userLoggedIn);
+  const token = localStorage.getItem('accessToken')
+  console.log(token);
+  
+  // const token = useSelector(state => state.user.userLoggedIn);
   // const ngo_token = useSelector(state => state.ngo.ngo._id);
 
   return (

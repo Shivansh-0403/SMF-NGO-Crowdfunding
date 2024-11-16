@@ -26,6 +26,8 @@ const Login = () => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/login`, userData);
             const { user, accessToken, refreshToken } = response.data;
+
+            console.log(accessToken);
     
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
@@ -33,6 +35,7 @@ const Login = () => {
             const storeUser = {
                 name: user.name,
                 email: user.email,
+                contact: user.contact
             };
     
             dispatch(setUser(storeUser));

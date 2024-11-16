@@ -14,10 +14,10 @@ const userSchema = new Schema(
             required: true,
             index: true
         },
-        // type: {
-        //     type: String,
-        //     required: true,
-        // },
+        contact: {
+            type: String,
+            // required: true,
+        },
         password: {
             type: String,
             required: [true, 'Password is required']

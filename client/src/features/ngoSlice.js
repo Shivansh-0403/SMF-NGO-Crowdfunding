@@ -1,18 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    ngo: {
-        // _id: "",
-        // name: "",
-        // owner: "",
-        // email: "",
-        // website: "",
-        // address: "",
-        // city: "",
-        // contact: "",
-        // logo: "",
-        // photos: [],
-    },
+    ngo: {},
 };
 
 const ngoSlice = createSlice({

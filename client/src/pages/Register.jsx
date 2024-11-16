@@ -9,6 +9,7 @@ const Register = () => {
     const [userData, setUserData] = React.useState({
         email: "",
         name: "",
+        contact: "",
         password: ""
     });
 
@@ -32,7 +33,7 @@ const Register = () => {
             console.log("Error: ", error);
             window.alert(error.response?.data?.message || "Something went wrong");
         }
-        setUserData({ name: "", email: "", password: "" });
+        setUserData({ name: "", email: "", contact: "", password: "" });
     };
 
     return (
@@ -40,7 +41,7 @@ const Register = () => {
             {/* Left Section with Image */}
             <div className="flex-1 hidden md:flex items-center justify-center bg-cover bg-center">
                 <div className="bg-white dark:bg-gray-900 bg-opacity-40 w-full h-full flex items-center justify-center">
-                    <img src={img} alt="Logo" className="w-2/5 h-auto rounded-lg" />
+                    <img src={img} alt="Logo" className="w-1/3 h-auto rounded-lg" />
                 </div>
             </div>
 
@@ -70,6 +71,16 @@ const Register = () => {
                             id="name"
                             placeholder="Enter your name"
                             value={userData.name}
+                            onChange={handleChange}
+                            className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
+                        />
+
+<input
+                            type="text"
+                            name="contact"
+                            id="contact"
+                            placeholder="Enter your contact details"
+                            value={userData.contact}
                             onChange={handleChange}
                             className="w-full py-3 px-5 border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
                         />

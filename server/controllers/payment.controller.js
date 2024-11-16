@@ -4,14 +4,22 @@ import { Payment } from "../models/payment.models.js";
 
 export const checkout = async (req, res) => {
     try {
+        const { amount, user, ngo } = req.body;
+
         const options = {
-            amount: Number(req.body.amount) * 100, // Razorpay expects amount in paise
+            amount: Number(amount) * 100,
             currency: "INR",
         };
-        
+
         const order = await instance.orders.create(options);
-        console.log(order);
-        
+
+        await Payment.create({
+            razorpay_order_id: order.id,
+            amount,
+            user,
+            ngo,
+        });
+
         res.status(200).json({
             success: true,
             order,
@@ -24,29 +32,42 @@ export const checkout = async (req, res) => {
 
 export const paymentVerification = async (req, res) => {
     try {
-        const { order_id, payment_id, signature } = req.body;
-        console.log(req.body);
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
-        const body = order_id + "|" + payment_id;
+        const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto
             .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
             .update(body.toString())
             .digest("hex");
 
-        const isAuthentic = expectedSignature === signature;
+        const isAuthentic = expectedSignature === razorpay_signature;
 
         if (isAuthentic) {
-            await Payment.create({
-                order_id,
-                payment_id,
-                signature,
-            });
+            await Payment.findOneAndUpdate(
+                { razorpay_order_id },
+                {
+                    razorpay_payment_id,
+                    razorpay_signature,
+                    payment_status: "Successful",
+                },
+                { new: true }
+            );
 
             res.redirect(
-                `http://localhost:5173/payment-success?reference=${payment_id}`
+                `http://localhost:5173/payment-success?reference=${razorpay_payment_id}`
             );
         } else {
+            await Payment.findOneAndUpdate(
+                { razorpay_order_id },
+                {
+                    razorpay_payment_id,
+                    razorpay_signature,
+                    payment_status: "Unsuccessful",
+                },
+                { new: true }
+            );
+
             res.status(400).json({
                 success: false,
                 message: "Payment verification failed",
