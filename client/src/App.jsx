@@ -15,10 +15,11 @@ import About from './pages/About'
 import Profile from './pages/Profile'
 import Donate from './pages/Donate'
 import PaymentSuccess from './pages/PaymentSuccess'
+import Transactions from './pages/Transactions'
 
 function App() {
   const token = localStorage.getItem('accessToken')
-  console.log(token);
+  // console.log(token);
   
   // const token = useSelector(state => state.user.userLoggedIn);
   // const ngo_token = useSelector(state => state.ngo.ngo._id);
@@ -45,6 +46,9 @@ function App() {
 
         {token && <Route path='/profile' element={<Profile />}></Route>}
         <Route path="/profile" element={<Navigate replace to="/login" />} />
+
+        {token && <Route path='/user-transactions' element={<Transactions />}></Route>}
+        <Route path="/user-transactions" element={<Navigate replace to="/login" />} />
 
         <Route path="/payment-success" element={<PaymentSuccess />} />
 

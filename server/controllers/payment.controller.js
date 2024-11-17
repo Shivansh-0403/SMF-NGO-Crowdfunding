@@ -87,3 +87,25 @@ export const getRazorpayKey = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 };
+
+export const getUserTxnHistory = async (req, res) => {
+    try {
+        const { email } = req.params
+
+        const data = await Payment.find({ "user.email": email }).select("-razorpay_signature -razorpay_order_id");
+
+        // console.log(data);
+        console.log("User Transactions Sent");
+        res.status(200).json({
+            statusCode: 200,
+            data: data,
+            message: "Data Sent"
+        });
+    } catch (error) {
+        console.log("Error - No NGOs: ", error.message);
+        res.status(500).json({
+            statusCode: 500,
+            message: "Error - No NGOs: " + error.message
+        });
+    }
+}
