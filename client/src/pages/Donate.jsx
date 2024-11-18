@@ -5,7 +5,10 @@ import { Link, useNavigate } from 'react-router-dom'
 
 function Donate() {
     const ngo = useSelector(state => state.ngo.ngo);
-    const user = useSelector(state => state.user.user);
+
+    // const user = useSelector(state => state.user.user);
+    const userString = localStorage.getItem("user");
+    const user = JSON.parse(userString);
 
     const [data, setData] = useState({
         add1: "",

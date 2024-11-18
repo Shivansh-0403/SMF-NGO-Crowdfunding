@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { setNgoDetails } from '../features/ngoSlice';
 
 function Transactions() {
-    const user = useSelector(state => state.user.user)
+    // const user = useSelector(state => state.user.user)
+    const userString = localStorage.getItem("user");
+    const user = JSON.parse(userString);
     const [userTransactions, setUserTransactions] = useState([])
 
     const navigate = useNavigate();

@@ -110,7 +110,7 @@ const logoutUser = async (req, res) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
-        console.log(token);
+        console.log(req.header("Authorization"));
         if (!token) {
             throw new Error("Unauthorized request");
         }

@@ -3,7 +3,7 @@ import Header from '../components/Main_Header'
 // import Topngo from '../components/Topngo'
 import About from './About'
 import Goals from '../components/Goals'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 // import { setScrollTarget, clearScrollTarget } from '../features/scrollSlice';
 
 function Home() {

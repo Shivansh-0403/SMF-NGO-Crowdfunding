@@ -15,21 +15,26 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-const allowedOrigins = [
-    "http://localhost:5173",
-    process.env.CORS_ORIGIN
-];
+// const allowedOrigins = [
+//     "http://localhost:5173",
+//     process.env.CORS_ORIGIN
+// ];
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true, // Only if you're using credentials like cookies
+// }));
 
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true, // Only if you're using credentials like cookies
-}));
+    origin: ["http://localhost:5173", process.env.CORS_ORIGIN],
+    credentials: true,
+}))
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,

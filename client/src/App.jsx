@@ -18,20 +18,37 @@ import PaymentSuccess from './pages/PaymentSuccess'
 import Transactions from './pages/Transactions'
 
 function App() {
-  const token = localStorage.getItem('accessToken')
-  // console.log(token);
+  // const token = localStorage.getItem('accessToken')
+  const [token, setToken] = useState(localStorage.getItem("accessToken"));
+  console.log(token);
   
   // const token = useSelector(state => state.user.userLoggedIn);
-  // const ngo_token = useSelector(state => state.ngo.ngo._id);
+  const ngo_token = useSelector(state => state.ngo.ngo._id);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+        setToken(localStorage.getItem("accessToken"));
+        // setNgoToken(localStorage.getItem("ngoToken"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+        window.removeEventListener("storage", handleStorageChange);
+    };
+}, []);
 
   return (
     <>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home></Home>} />
-        <Route path='/listings' element={<Ngo_List />} ></Route>
-        <Route path='/details' element={<Ngo_Details />} ></Route>
         <Route path='/about' element={<About />} ></Route>
+        <Route path='/listings' element={<Ngo_List />} ></Route>
+
+        {ngo_token && <Route path='/details' element={<Ngo_Details />}></Route>}
+        {/* <Route path='/details' element={<Ngo_Details />} ></Route> */}
+        <Route path="/details" element={<Navigate replace to="/listings" />} />
 
         {token && <Route path='/register-ngo' element={<RegisterNgo />}></Route>}
         <Route path="/register-ngo" element={<Navigate replace to="/login" />} />

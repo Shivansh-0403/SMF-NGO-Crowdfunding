@@ -9,9 +9,7 @@ const PaymentSuccess = () => {
     return (
         // <div>
             <div>
-
                 <h1> Order Successfull</h1>
-
                 <div>
                     Reference No.{referenceNum}
                 </div>

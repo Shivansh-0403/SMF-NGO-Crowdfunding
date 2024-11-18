@@ -43,7 +43,11 @@ function RegisterNgo() {
         navigate("/");
     };
 
-    const email = useSelector(state => state.user.user.email);
+    // const email = useSelector(state => state.user.user.email);
+    const userString = localStorage.getItem("user");
+    const user = JSON.parse(userString);
+    const email = user.email;
+
     const handleRegister = async (e) => {
         e.preventDefault();
 

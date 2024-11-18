@@ -37,6 +37,8 @@ const Login = () => {
                 email: user.email,
                 contact: user.contact
             };
+
+            localStorage.setItem("user", JSON.stringify(user));
     
             dispatch(setUser(storeUser));
             dispatch(setLoginStatus(true));
