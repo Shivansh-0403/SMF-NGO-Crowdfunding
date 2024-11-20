@@ -15,7 +15,7 @@ const Ngo_Header = (props) => {
                         {props.name}
                     </h2>
                 {/* </div> */}
-            </div>
+            </div> 
         </section>
     );
 };

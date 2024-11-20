@@ -81,7 +81,7 @@ const Navbar = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {}, 
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {},
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -165,32 +165,32 @@ const Navbar = () => {
                         <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                             <Link
                                 to="/"
-                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transform rounded-md lg:mt-0 dark:text-gray-200 transition-all duration-300 delay-150 hover:text-lg"
                             >
                                 Home
                             </Link>
                             <Link
                                 to="/about"
                                 // onClick={handleScrollToAbout}
-                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transform rounded-md lg:mt-0 dark:text-gray-200 transition-all duration-300 delay-150 hover:text-lg"
                             >
                                 About
                             </Link>
                             <Link
                                 to="/listings"
-                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transform rounded-md lg:mt-0 dark:text-gray-200 transition-all duration-300 delay-150 hover:text-lg"
                             >
                                 Browse NGOs
                             </Link>
                             <Link
                                 to="/register-ngo"
-                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transform rounded-md lg:mt-0 dark:text-gray-200 transition-all duration-300 delay-150 hover:text-lg"
                             >
                                 Register NGO
                             </Link>
                             <Link
                                 to="/donate"
-                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="px-3 py-2 mx-3 mt-2 text-gray-700 transform rounded-md lg:mt-0 dark:text-gray-200 transition-all duration-300 delay-150 hover:text-lg"
                             >
                                 Donate
                             </Link>

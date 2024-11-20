@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -19,24 +19,9 @@ import Transactions from './pages/Transactions'
 
 function App() {
   // const token = localStorage.getItem('accessToken')
-  const [token, setToken] = useState(localStorage.getItem("accessToken"));
-  console.log(token);
   
   // const token = useSelector(state => state.user.userLoggedIn);
   const ngo_token = useSelector(state => state.ngo.ngo._id);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-        setToken(localStorage.getItem("accessToken"));
-        // setNgoToken(localStorage.getItem("ngoToken"));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-        window.removeEventListener("storage", handleStorageChange);
-    };
-}, []);
 
   return (
     <>
@@ -50,22 +35,29 @@ function App() {
         {/* <Route path='/details' element={<Ngo_Details />} ></Route> */}
         <Route path="/details" element={<Navigate replace to="/listings" />} />
 
-        {token && <Route path='/register-ngo' element={<RegisterNgo />}></Route>}
-        <Route path="/register-ngo" element={<Navigate replace to="/login" />} />
+        {/* {token && <Route path='/register-ngo' element={<RegisterNgo />}></Route>}
+        <Route path="/register-ngo" element={<Navigate replace to="/login" />} /> */}
+
+        {/* <Route path='/register-ngo' element={token ? <RegisterNgo /> : <Login />}></Route> */}
         
-        {token && <Route path='/donate' element={<Donate />}></Route>}
-        <Route path="/donate" element={<Navigate replace to="/login" />} />
+        <Route path='/register-ngo' element={<RegisterNgo />}></Route>
+        <Route path='/donate' element={<Donate />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/user-transactions' element={<Transactions />}></Route>
+
+        {/* {token && <Route path='/donate' element={<Donate />}></Route>}
+        <Route path="/donate" element={<Navigate replace to="/login" />} /> */}
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPass />} />
         <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
 
-        {token && <Route path='/profile' element={<Profile />}></Route>}
-        <Route path="/profile" element={<Navigate replace to="/login" />} />
+        {/* {token && <Route path='/profile' element={<Profile />}></Route>}
+        <Route path="/profile" element={<Navigate replace to="/login" />} /> */}
 
-        {token && <Route path='/user-transactions' element={<Transactions />}></Route>}
-        <Route path="/user-transactions" element={<Navigate replace to="/login" />} />
+        {/* {token && <Route path='/user-transactions' element={<Transactions />}></Route>}
+        <Route path="/user-transactions" element={<Navigate replace to="/login" />} /> */}
 
         <Route path="/payment-success" element={<PaymentSuccess />} />
 

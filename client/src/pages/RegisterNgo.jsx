@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +47,12 @@ function RegisterNgo() {
     const userString = localStorage.getItem("user");
     const user = JSON.parse(userString);
     const email = user.email;
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, []);
 
     const handleRegister = async (e) => {
         e.preventDefault();

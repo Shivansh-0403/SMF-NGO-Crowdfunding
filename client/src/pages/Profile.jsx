@@ -10,6 +10,12 @@ function Profile() {
     const userString = localStorage.getItem("user");
     const user = JSON.parse(userString);
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, []);
+
     const [userNgos, setUserNgos] = useState([])
 
     const navigate = useNavigate();

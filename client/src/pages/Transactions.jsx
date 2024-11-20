@@ -9,25 +9,31 @@ function Transactions() {
     // const user = useSelector(state => state.user.user)
     const userString = localStorage.getItem("user");
     const user = JSON.parse(userString);
+
     const [userTransactions, setUserTransactions] = useState([])
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/user-transactions/${user.email}`);
-                const result = response.data;
-                console.log(result);
-                setUserTransactions(result.data);
-                // console.log(result.data);
-            } catch (err) {
-                console.log(err.message);
-            }
-        };
-
-        fetchData();
+        if (!user) {
+            navigate('/login')
+        }
+        else {
+            const fetchData = async () => {
+                try {
+                    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/user-transactions/${user.email}`);
+                    const result = response.data;
+                    console.log(result);
+                    setUserTransactions(result.data);
+                    // console.log(result.data);
+                } catch (err) {
+                    console.log(err.message);
+                }
+            };
+    
+            fetchData();
+        }
     }, []);
 
     const handleClick = (element) => {
