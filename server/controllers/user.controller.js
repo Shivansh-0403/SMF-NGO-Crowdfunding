@@ -110,7 +110,7 @@ const logoutUser = async (req, res) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
-        console.log(req.header("Authorization"));
+        console.log(token);
         if (!token) {
             throw new Error("Unauthorized request");
         }
@@ -152,6 +152,7 @@ const logoutUser = async (req, res) => {
                 message: "User logged out"
             });
     } catch (error) {
+        // console.log(error);
         res
             .status(401)
             .json({
