@@ -39,7 +39,7 @@ function App() {
         <Route path="/register-ngo" element={<Navigate replace to="/login" />} /> */}
 
         {/* <Route path='/register-ngo' element={token ? <RegisterNgo /> : <Login />}></Route> */}
-        
+
         <Route path='/register-ngo' element={<RegisterNgo />}></Route>
         <Route path='/donate' element={<Donate />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
