@@ -18,7 +18,7 @@ const Main_Header = () => {
                                 with your support.
                             </p>
                             <Link to="/donate">
-                                <button className="w-full px-5 py-2 mt-6 text-lg font-medium tracking-wider text-white transition-colors duration-300 transform bg-blue-700 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                                <button className="w-full px-5 py-2 mt-6 text-md tracking-wider text-white transition-colors duration-300 transform bg-blue-700 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                     Donate
                                 </button>
                             </Link>

@@ -16,6 +16,7 @@ import Profile from './pages/Profile'
 import Donate from './pages/Donate'
 import PaymentSuccess from './pages/PaymentSuccess'
 import Transactions from './pages/Transactions'
+import DonateLanding from './pages/DonateLanding'
 
 function App() {
   // const token = localStorage.getItem('accessToken')
@@ -41,7 +42,8 @@ function App() {
         {/* <Route path='/register-ngo' element={token ? <RegisterNgo /> : <Login />}></Route> */}
 
         <Route path='/register-ngo' element={<RegisterNgo />}></Route>
-        <Route path='/donate' element={<Donate />}></Route>
+        {ngo_token && <Route path='/donate' element={<Donate />}></Route>}
+        <Route path='/donate' element={<DonateLanding />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/user-transactions' element={<Transactions />}></Route>
 
